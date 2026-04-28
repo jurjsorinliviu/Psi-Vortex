@@ -655,7 +655,7 @@ flowchart TB
 ## 📄 Citation
 
 ```bibtex
-@misc{jurj_psivortex_2025,
+@misc{jurj_psivortex_2026,
   title        = {Ψ-Vortex: A Physics-Informed Framework for Automated Coupling Inference and Compact Modeling in Three-Dimensional Neuromorphic Devices},
   author       = {Jurj, Sorin Liviu},
   year         = {2026},
