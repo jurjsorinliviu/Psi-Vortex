@@ -1,0 +1,6 @@
+model,phase,time_us_per_sample,time_ms_per_step,overhead_vs_baseline
+Baseline (PSI-xLSTM),inference,13.584782812358753,1.7388521999819204,1.0
+Psi-Vortex,inference,13.44234687530843,1.7206204000394791,0.9895150375962771
+Baseline (PSI-xLSTM),training (no BIC),,4.07860100036487,1.0
+Psi-Vortex (no BIC),training (no BIC),,4.07320800004527,0.998677732801243
+Psi-Vortex (with BIC),training (BIC on),,11.089975000359118,2.7190634728346836

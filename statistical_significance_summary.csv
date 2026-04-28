@@ -1,0 +1,2 @@
+n_seeds,vortex_mse_mean,vortex_mse_std,random_mse_mean,random_mse_std,mse_reduction_pct,vortex_ci_low,vortex_ci_high,p_value_mse,p_value_epochs,cohens_d,vortex_epochs_mean,random_epochs_mean,conv_speedup
+20,9.593647112282611e-08,4.946545418441369e-08,6.50649344180465e-07,3.8364260247103436e-07,85.2552727546872,7.278592594441652e-08,1.190870163012357e-07,2.636183564892889e-06,2.539711098873925e-13,2.0280381192076478,65.45,441.05,6.738731856378915
