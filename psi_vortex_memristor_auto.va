@@ -1,0 +1,49 @@
+// ============================================================
+// Ψ-Vortex Auto-Generated Verilog-A Compact Model
+// Generated: 2025-12-01 17:42:06
+// Symmetry: NONE (no clear symmetry detected)
+// Model Type: Asymmetric nonlinear element (diode-like)
+// ============================================================
+`include "disciplines.vams"
+`include "constants.vams"
+
+module psi_vortex_auto(p, n);
+    inout p, n;
+    electrical p, n;
+    
+    // ============================================================
+    // Extracted Physics Parameters (Ψ-Vortex BIC-optimized)
+    // ============================================================
+    parameter real r_off = 1.352479e+06;   // Reverse resistance [Ohm]
+    parameter real r_on = 9.156440e+02;     // Forward resistance [Ohm]
+    parameter real alpha = 1.000000e+00;    // Nonlinearity coefficient
+    parameter real v_th = 0.3;                  // Threshold voltage [V]
+    
+    analog begin
+        real V_in, I_out, G_fwd, G_rev;
+        
+        // Input voltage
+        V_in = V(p, n);
+        
+        // ============================================================
+        // ASYMMETRIC: Different behavior for +V and -V
+        // Physical basis: Rectifying junction, Schottky barrier
+        // ============================================================
+        
+        // Forward conductance (exponential increase)
+        G_fwd = (1.0/r_on) * (exp(alpha * (V_in - v_th)) - 1);
+        
+        // Reverse conductance (small leakage)
+        G_rev = 1.0/r_off;
+        
+        // Asymmetric current
+        if (V_in > v_th) begin
+            I_out = G_fwd * V_in;
+        end else begin
+            I_out = G_rev * V_in;
+        end
+        
+        // Output
+        I(p, n) <+ I_out;
+    end
+endmodule

@@ -1,0 +1,32 @@
+// Psi-Vortex Auto-Generated Thermal-Aware Memristor Model
+// 3D Neuromorphic Thermal Crosstalk Discovery
+// BASE: Psi-xLSTM with Matrix Memory (Equation 3)
+`include "disciplines.vams"
+`include "constants.vams"
+
+module vortex_3d_memristor(p, n, thermal_pin);
+    inout p, n, thermal_pin;
+    electrical p, n, thermal_pin;
+    
+    // Extracted Physics Parameters (from Psi-Vortex discovery)
+    parameter real r_off = 10000.0;
+    parameter real alpha_thermal = 0.08;  // BIC-discovered value
+    parameter real tau_thermal = 0.05;
+
+    analog begin
+        real V_in, Temp_in, I_mem, T_dot;
+        
+        V_in = V(p, n);
+        Temp_in = V(thermal_pin); // 3D Thermal Crosstalk Port
+        
+        // Thermal-Aware Conductivity Modulation
+        // Ghost coupling effect: I = V * G0 * exp(alpha * deltaT)
+        I(p, n) <+ V(p, n) * (1.0/r_off) * exp(alpha_thermal * (Temp_in - 298.0));
+        
+        // Self-Heating Feedback (Joule heating)
+        I(thermal_pin) <+ -1.0 * V(p,n) * I(p,n);
+        
+        // Thermal Dynamics: dT/dt = -(T - Tamb)/tau + P_heating
+        T_dot = (-(Temp_in - 298.0)/tau_thermal + V(p,n)*I(p,n));
+    end
+endmodule
