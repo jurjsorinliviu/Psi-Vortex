@@ -646,8 +646,8 @@ flowchart TB
 | Framework    | Repository                                                   | Automation Level        |
 | ------------ | ------------------------------------------------------------ | ----------------------- |
 | Ψ-NN         | [github.com/ZitiLiu/Psi-NN](https://github.com/ZitiLiu/Psi-NN) | Manual                  |
-| Ψ-HDL        | [github.com/jurjsorinliviu/Psi-HDL](https://github.com/jurjsorinliviu/PSI-HDL) | Manual                  |
-| Ψ-xLSTM      | [github.com/jurjsorinliviu/Psi-xLSTM](https://github.com/jurjsorinliviu/PSI-xLSTM) | Manual                  |
+| Ψ-HDL        | [github.com/jurjsorinliviu/Psi-HDL](https://github.com/jurjsorinliviu/Psi-HDL) | Manual                  |
+| Ψ-xLSTM      | [github.com/jurjsorinliviu/Psi-xLSTM](https://github.com/jurjsorinliviu/Psi-xLSTM) | Manual                  |
 | **Ψ-Vortex** | This repository                                              | **3/5 steps automated** |
 
 ---
@@ -656,10 +656,10 @@ flowchart TB
 
 ```bibtex
 @misc{jurj_psivortex_2025,
-  title        = {Ψ-Vortex: A Unified Framework for Automated Multi-Physics Coupling Inference and Accelerated Compact Modeling in 3D Neuromorphic Devices},
+  title        = {Ψ-Vortex: A Physics-Informed Framework for Automated Coupling Inference and Compact Modeling in Three-Dimensional Neuromorphic Devices},
   author       = {Jurj, Sorin Liviu},
-  year         = {2025},
-  note         = {Manuscript under review},
+  year         = {2026},
+  note         = {Manuscript submitted},
   howpublished = {GitHub repository}
 }
 ```
@@ -669,10 +669,6 @@ flowchart TB
 ## 📜 License
 
 MIT License - see [LICENSE](LICENSE) file.
-
-## 👤 Author
-
-**Sorin Liviu Jurj** - jurjsorinliviu@yahoo.de
 
 ---
 
@@ -756,4 +752,4 @@ If a system is purely static, low-frequency, or already well described by a simp
 Ψ-Vortex is designed for compact-model development and SPICE-based simulation workflows. Its main value is reducing manual effort and accelerating virtual prototyping before fabrication.
 
 **Where can I read the full conceptual background?**  
-See the accompanying [technical rationale document](psi-vortex-technical-rationale.pdf), which provides the design lineage, architectural motivations, and scope boundaries of the framework. Note: This document provides architectural and historical context for the Ψ-Vortex framework. It complements, but does not replace, the peer-reviewed manuscript.
+See the accompanying [technical rationale document](psi-vortex-technical-rationale.pdf), which provides the design lineage, architectural motivations, and scope boundaries of the framework. Note: This document provides architectural and historical context for the Ψ-Vortex framework. It complements, but does not replace, the peer-reviewed manuscript. I will upload it as soon as the manuscript gets published. Thank you for your understanding and patience.
