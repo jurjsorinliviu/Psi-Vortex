@@ -236,14 +236,7 @@ python p6b_ngspice_validation.py
 # Requires: openvaf.exe at C:/ngspice_work/openvaf/ AND ngspice_con.exe
 python p6c_osdi_cosim.py
 
-# Step 4: Assemble supplement PDF and main-text insertions
-# Requires: LaTeX (MiKTeX or TeX Live)
-python build_supplement.py
-cd supplementary_experiments_output
-pdflatex supplementary_psi_vortex.tex && pdflatex supplementary_psi_vortex.tex
-```
-
-Steps 2–3 require external tools; steps 1 and 4 need only Python/PyTorch and LaTeX respectively. All outputs land in `supplementary_experiments_output/`.
+Steps 2–3 require external tools; step 1 needs only Python/PyTorch. All outputs land in `supplementary_experiments_output/`.
 
 ---
 
@@ -456,7 +449,6 @@ PSI-Vortex
 │   ├── supplementary_experiments.py      # P1–P10 experiment driver
 │   ├── p6b_ngspice_validation.py             # native ngspice B-source transient
 │   ├── p6c_osdi_cosim.py                     # OpenVAF→OSDI compiled VA + co-sim
-│   ├── build_supplement.py                   # assembles LaTeX supplement PDF
 │   └── supplementary_experiments_output/
 │       ├── supplementary_psi_vortex.pdf      # compiled 9-page supplement
 │       ├── main_text_insertions.md           # ready-to-paste main-text paragraphs
