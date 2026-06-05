@@ -190,7 +190,7 @@ The full automated pipeline reaches 0.97× of manual-configuration MSE.
 
 ### NEW: Supplementary Experiments (P1–P10 + ngspice/OSDI)
 
-A standalone reviewer-response suite produced by `supplementary_experiments.py`. All outputs are in `supplementary_experiments_output/`.
+A standalone reviewer-response suite produced by `supplementary_experiments.py`, with a compiled PDF supplement (`supplementary_psi_vortex.pdf`) and ready-to-paste main-text insertions (`main_text_insertions.md`). All outputs are in `supplementary_experiments_output/`.
 
 **These experiments are conservative stress tests; they do not redefine the headline numerical claims of the main manuscript.**
 
@@ -235,8 +235,9 @@ python p6b_ngspice_validation.py
 # Step 3: Compiled Verilog-A via OpenVAF/OSDI + driver–victim co-simulation
 # Requires: openvaf.exe at C:/ngspice_work/openvaf/ AND ngspice_con.exe
 python p6c_osdi_cosim.py
+```
 
-Steps 2–3 require external tools; step 1 needs only Python/PyTorch. All outputs land in `supplementary_experiments_output/`.
+Steps 2–3 require external tools; steps 1 only Python/PyTorch. All outputs land in `supplementary_experiments_output/`.
 
 ---
 
