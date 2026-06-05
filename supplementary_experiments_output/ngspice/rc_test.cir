@@ -1,0 +1,10 @@
+* RC smoke test
+V1 in 0 PULSE(0 1 0 1u 1u 1m 2m)
+R1 in out 1k
+C1 out 0 1u
+.control
+tran 10u 4m
+wrdata "C:/Users/jurjs/Desktop/PostDoc pmTUC/Papers ideas/Psi-Vortex paper/Supplementary_Experiments/Psi-Vortex-main/reviewer_experiments_output/ngspice/rc_out.txt" v(out)
+quit
+.endc
+.end

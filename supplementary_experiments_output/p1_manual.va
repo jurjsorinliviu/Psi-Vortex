@@ -1,0 +1,25 @@
+// Psi-Vortex auto-generated thermal-aware memristor compact model
+// Extracted from a trained Psi-Vortex (Psi-xLSTM) student.
+`include "disciplines.vams"
+`include "constants.vams"
+
+module psi_vortex_thermal(p, n, thermal_pin);
+    inout p, n, thermal_pin;
+    electrical p, n, thermal_pin;
+
+    // --- Extracted parameters (data-driven) ---
+    parameter real g_base       = 1.000000e-05;   // baseline conductance [S]
+    parameter real alpha_thermal= 0.137827;    // recovered coupling [1/K]
+    parameter real tau_thermal  = 0.0500;      // thermal time constant [s]
+    parameter real T_amb        = 298.0;          // ambient [K]
+
+    real dTemp, ghost, P_heat;
+    analog begin
+        dTemp = V(thermal_pin) - T_amb;              // crosstalk-induced dT
+        ghost = exp(alpha_thermal * dTemp);          // conductance modulation
+        I(p, n) <+ V(p, n) * g_base * ghost;         // victim current
+        P_heat  = V(p, n) * I(p, n);                 // self-heating
+        I(thermal_pin) <+ -P_heat;                   // thermal feedback
+        // dT/dt = -(T - T_amb)/tau + P_heat  (companion thermal network)
+    end
+endmodule

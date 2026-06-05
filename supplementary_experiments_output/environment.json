@@ -1,0 +1,19 @@
+{
+  "python": "3.14.0",
+  "torch": "2.9.0+cu130",
+  "cuda_available": true,
+  "device": "cuda",
+  "numpy": "2.3.4",
+  "pandas": "2.3.3",
+  "scipy_available": true,
+  "auto_symmetry": true,
+  "auto_architecture": true,
+  "seeds": [
+    42,
+    123,
+    456
+  ],
+  "groups_run": [
+    3
+  ]
+}

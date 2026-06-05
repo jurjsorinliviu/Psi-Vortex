@@ -1,0 +1,12 @@
+| Claim | Experiment | Baseline | Metric | Script |
+| --- | --- | --- | --- | --- |
+| Physics-aware init accelerates convergence | P1, P5 init ablation | random/orthogonal Psi-xLSTM | epochs to R2=0.95 / wall-clock | run_p1/run_p5 |
+| Auto symmetry ~ expert symmetry | P5 init-only(auto) vs (expert) | expert mask | val MSE / alpha error | run_p5 |
+| BIC automates structure beyond L1/L2 | P2 BIC vs regularizers | L1/L2 + k-means, fixed K-r | eff-DoF, K/r stability, manual choices | run_p2 |
+| Architecture selection avoids expert guess | P1/P5 bounded grid | manual architecture | validation MSE | run_p1/run_p5 |
+| Latent coupling is identifiable above threshold | P3 alpha sweep | MLP / xLSTM / manual Psi-xLSTM | alpha error vs GT | run_p3 |
+| No false coupling invented | P3 alpha=0 + P7 controls | shuffled driver / victim-only | recovered alpha, latent corr | run_p3/run_p7 |
+| Bounded robustness to noise/samples | P4 noise x N map | calibrated dataset | alpha error heatmap | run_p4 |
+| Generalizes across stack geometry | P8 cross-geometry | single geometry | alpha error across motifs | run_p8 |
+| Robust to measurement artifacts | P9 artifact stress | clean data | alpha error, K/r stability | run_p9 |
+| Compact model is deployable / faithful | P6 Verilog-A fidelity | PyTorch reference / GT | waveform MAE/RMSE | run_p6 |

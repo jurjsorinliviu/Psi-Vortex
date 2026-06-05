@@ -1,0 +1,7 @@
+| method | val_mse | params | eff_dof | K_mean | K_std | r_mean | r_std | alpha_err_pct | manual_choices |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| L2 + k-means | 4.3998e-05 | 1302 | 1.1628 | 8 | 0 | 15.667 | 0.57735 | 176.87 | high |
+| L1 + k-means | 6.6315e-05 | 1302 | 1.197 | 8 | 0 | 16 | 0 | 193.32 | high |
+| Fixed K=4 / r=4 | 0.00024184 | 1302 | 1.9371 | 8 | 0 | 4 | 0 | 100 | high |
+| BIC-only | 1.874e-06 | 1302 | 1.0053 | 8 | 0 | 5 | 6.9282 | 147.26 | medium |
+| Full Psi-Vortex | 4.9314e-10 | 1302 | 1 | 1 | 0 | 1 | 0 | 41.377 | low |

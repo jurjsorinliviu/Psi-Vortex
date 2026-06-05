@@ -1,0 +1,7 @@
+| control | alpha_gt | alpha_rec_mean | alpha_rec_std | latent_corr_mean | val_mse_mean |
+| --- | --- | --- | --- | --- | --- |
+| REF genuine alpha=0.08 | 0.08 | 0.047023 | 0.019364 | 0.30838 | 6.2444e-10 |
+| alpha=0 (no coupling) | 0 | 0.0006822 | 0.036075 | 0.30849 | 2.2617e-10 |
+| fake slow drift (alpha=0) | 0 | -0.0023005 | 0.034559 | 0.30848 | 2.313e-10 |
+| shuffled driver | 0.08 | 0.059568 | 0.0052646 | 0.026588 | 3.0675e-10 |
+| victim-only (no driver) | 0.08 | 0.055035 | 0.017172 | 0.82331 | 5.8797e-10 |

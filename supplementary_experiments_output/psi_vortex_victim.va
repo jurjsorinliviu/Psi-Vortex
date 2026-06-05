@@ -1,0 +1,34 @@
+// Psi-Vortex thermally-coupled victim memristor -- OSDI-compilable Verilog-A
+// Compiled with OpenVAF (-> .osdi) and run in ngspice as a real compact model.
+//
+// Terminals:
+//   p, n : victim electrical terminals (read across these)
+//   th   : thermal node; V(th) carries the temperature rise dT above ambient
+//          (driven externally by the crosstalk/Joule-heating source)
+//
+// Behaviour (the exported Psi-Vortex compact thermal-coupling law):
+//   I(p,n) = V(p,n) * g_base * exp(alpha_th * dT)
+//   thermal node RC:  c_th * d(dT)/dt + dT/r_th = (external heat current)
+// so that  d(dT)/dt = -dT/(r_th*c_th) + heat,  i.e. tau = r_th*c_th.
+`include "disciplines.vams"
+`include "constants.vams"
+
+module psi_vortex_victim(p, n, th);
+    inout p, n, th;
+    electrical p, n, th;
+
+    parameter real g_base   = 1e-5  from (0:inf);   // baseline conductance [S]
+    parameter real alpha_th = 0.0669;               // recovered coupling [1/K]
+    parameter real c_th     = 1.0   from (0:inf);   // thermal "capacitance"
+    parameter real r_th     = 0.05  from (0:inf);   // thermal "resistance" (tau=r_th*c_th)
+
+    real ghost;
+
+    analog begin
+        ghost = exp(alpha_th * V(th));
+        // victim current modulated by the thermal state
+        I(p, n) <+ V(p, n) * g_base * ghost;
+        // companion thermal network (self-contained dT dynamics)
+        I(th)   <+ c_th * ddt(V(th)) + V(th) / r_th;
+    end
+endmodule

@@ -1,0 +1,12 @@
+# Psi-Vortex reviewer-response experiment configuration
+quick: false
+device: cuda
+torch: 2.9.0+cu130
+seeds: [42, 123, 456]
+epochs: 120
+arch_epochs: 60
+alpha_sweep: [0.0, 0.03, 0.05, 0.08, 0.1, 0.15, 0.2]
+noise_levels_pct: [0.0, 1.0, 3.0, 5.0, 10.0]
+sample_sizes: [500, 1000, 2000, 5000]
+noise_alphas: [0.05, 0.08, 0.15]
+constants: {T_amb: 298.0, V_read: 0.2, g_base: 1.0e-5}
