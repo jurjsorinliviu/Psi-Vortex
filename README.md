@@ -751,7 +751,7 @@ Validation loss on synthetic data: 3.64×10⁻⁹, achieved without temperature 
   title        = {Ψ-Vortex: A Physics-Informed Framework for Automated Coupling Inference and Compact Modeling in Three-Dimensional Neuromorphic Devices},
   author       = {Jurj, Sorin Liviu},
   year         = {2026},
-  note         = {Manuscript submitted},
+  note         = {Manuscript under review},
   howpublished = {GitHub repository}
 }
 ```
