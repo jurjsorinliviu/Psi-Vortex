@@ -190,7 +190,7 @@ The full automated pipeline reaches 0.97× of manual-configuration MSE.
 
 ### NEW: Supplementary Experiments (P1–P10 + ngspice/OSDI)
 
-A standalone reviewer-response suite produced by `supplementary_experiments.py`, with a compiled PDF supplement (`supplementary_psi_vortex.pdf`) and ready-to-paste main-text insertions (`main_text_insertions.md`). All outputs are in `supplementary_experiments_output/`.
+A standalone suite produced by `supplementary_experiments.py`. All outputs are in `supplementary_experiments_output/`.
 
 **These experiments are conservative stress tests; they do not redefine the headline numerical claims of the main manuscript.**
 
