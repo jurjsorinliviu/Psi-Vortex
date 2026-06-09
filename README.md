@@ -446,13 +446,11 @@ PSI-Vortex
 │   ├── 12_scalability_experiments.py         ✨NEW (BIC runtime analysis)
 │   └── 13_numerically_stable_bic.py          ✨NEW (gradient stability)
 │
-├── Reviewer-Response Supplement ✨NEW
-│   ├── supplementary_experiments.py      # P1–P10 experiment driver
+├── Supplementary Experiments ✨NEW
+│   ├── supplementary_experiments.py          # P1–P10 experiment driver
 │   ├── p6b_ngspice_validation.py             # native ngspice B-source transient
 │   ├── p6c_osdi_cosim.py                     # OpenVAF→OSDI compiled VA + co-sim
 │   └── supplementary_experiments_output/
-│       ├── supplementary_psi_vortex.pdf      # compiled 9-page supplement
-│       ├── main_text_insertions.md           # ready-to-paste main-text paragraphs
 │       ├── p1_*.{csv,md,tex,png}             # P1–P10 tables and figures
 │       ├── ...
 │       ├── p6b_ngspice_fidelity.{csv,png}
