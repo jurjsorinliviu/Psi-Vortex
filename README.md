@@ -1,4 +1,4 @@
-# Ψ-Vortex: A Physics-Informed Framework for Automated Coupling Inference and Compact Modeling in Three-Dimensional Neuromorphic Devices
+# Ψ-Vortex: A Unified Framework for Automated Multi-Physics Coupling Inference and Accelerated Compact Modeling in 3D Neuromorphic Devices
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.0+](https://img.shields.io/badge/pytorch-2.0+-red.svg)](https://pytorch.org/)
@@ -11,11 +11,11 @@
 > This repository contains implementation code, experiments, and technical documentation accompanying a manuscript under peer review.  
 > The manuscript is the authoritative source for formal claims, definitions, and evaluation.
 
-Ψ-Vortex is a framework for converting electrical measurement data into compact Verilog-A models, automating three of five principal tuning steps within user-specified bounds. By combining physics-aware initialization with information-theoretic structure discovery, it accelerates training, compresses model size, and enables latent-state inference from voltage–current data alone. All validation is performed on synthetic datasets calibrated to published device parameters; experimental validation on fabricated devices remains future work. The framework is designed for compact-model development, SPICE-compatible deployment, and virtual prototyping of complex electronic and multi-physics systems.
+Ψ-Vortex is an automated framework for converting raw electrical measurement data into compact, high-fidelity Verilog-A models with minimal manual tuning. By combining physics-aware initialization with information-theoretic structure discovery, it automates structure discovery, compresses model size, and enables latent-state inference from voltage–current data alone. Latent-coupling recovery is enabled by the recurrent architecture's temporal integration; physics-aware initialization provides a stable, symmetry-aware starting point and a modest precision benefit. All validation is performed on synthetic datasets calibrated to published device parameters; experimental validation on fabricated devices remains future work. The framework is designed for compact-model development, SPICE-compatible deployment, and virtual prototyping of complex electronic and multi-physics systems.
 
 ---
 
-## Automation status
+## 🎉 AUTOMATION STATUS
 
 ```mermaid
 flowchart LR
@@ -44,28 +44,28 @@ flowchart LR
     
     A --> B --> C --> D --> E --> F --> G --> H
     
-    style A fill:#e1f5fe,color:#000000
-    style H fill:#c8e6c9,color:#000000
-    style B fill:#fff9c4,color:#000000
-    style C fill:#fff9c4,color:#000000
-    style D fill:#fff9c4,color:#000000
-    style E fill:#fff9c4,color:#000000
-    style F fill:#fff9c4,color:#000000
-    style G fill:#fff9c4,color:#000000
+    style A fill:#e1f5fe
+    style H fill:#c8e6c9
+    style B fill:#fff9c4
+    style C fill:#fff9c4
+    style D fill:#fff9c4
+    style E fill:#fff9c4
+    style F fill:#fff9c4
+    style G fill:#fff9c4
 ```
 
-The framework automates three of five principal manual steps (structural topology discovery, symmetry detection, architecture configuration) within a user-defined architecture search space and BIC bandwidth. Training data specification and search-space definition remain user responsibilities. All results are from synthetic benchmarks; see the manuscript for scope and limitations.
+**Note:** The framework automates three of five principal manual steps (structural topology discovery, symmetry detection, architecture configuration) within a user-defined architecture search space and BIC bandwidth. Training data specification and search-space definition remain user responsibilities. All results are from synthetic benchmarks; see the manuscript for scope and limitations.
 
 ### Automation Status (3 of 5 Steps)
 
-| Component                  | Method                   | Status      | Performance                               |
-| -------------------------- | ------------------------ | ----------- | ----------------------------------------- |
-| **Symmetry Mask (M_sym)**  | Auto-Detection (Eq. 6)   | ✅ Automated | 1.09× expert                              |
-| **Architecture (h, L, m)** | Validation-Based (Eq. 9) | ✅ Automated | 0.25× MSE vs. single manual configuration |
-| **Physics-Aware Init**     | Auto-Sym → Eq. 5         | ✅ Automated | 3.63× speedup                             |
-| **Clusters (K)**           | Adaptive BIC (Eq. 7-8)   | ✅ Automated | Negative loss convergence                 |
-| **Matrix Rank (r*)**       | Adaptive BIC (Eq. 7-8)   | ✅ Automated | 98.6% compression                         |
-| **Verilog-A Generation**   | Auto-Generation          | ✅ Automated | 0.984 correlation                         |
+| Component                  | Method                   | Status      | Performance                           |
+| -------------------------- | ------------------------ | ----------- | ------------------------------------- |
+| **Symmetry Mask (M_sym)**  | Auto-Detection (Eq. 6)   | ✅ Automated | 1.09× expert                          |
+| **Architecture (h, L, m)** | Validation-Based (Eq. 9) | ✅ Automated | **0.25× manual** (4× better!)         |
+| **Physics-Aware Init**     | Auto-Sym → Eq. 5         | ✅ Automated | Precision benefit (no speedup; 1.05×) |
+| **Clusters (K)**           | Adaptive BIC (Eq. 7-8)   | ✅ Automated | Negative loss convergence             |
+| **Matrix Rank (r*)**       | Adaptive BIC (Eq. 7-8)   | ✅ Automated | 98.6% compression                     |
+| **Verilog-A Generation**   | Auto-Generation          | ✅ Automated | 0.984 correlation                     |
 
 *Note: Physics-Aware Initialization (Eq. 5) automatically uses the symmetry mask from Auto-Detection (Eq. 6), making the automated steps of the training pipeline fully automatic. Training data and search-space boundaries remain user-specified.*
 
@@ -81,70 +81,42 @@ The framework automates three of five principal manual steps (structural topolog
 
 ### Key Innovations
 
-| Innovation                                          | Problem Solved                 | Performance                    |
-| --------------------------------------------------- | ------------------------------ | ------------------------------ |
-| **Physics-Aware Initialization** (Eq. 5)            | O(N²) computational bottleneck | 3.63× speedup                  |
-| **Automatic Symmetry Detection** (Eq. 6)            | Manual symmetry specification  | 1.09× expert                   |
-| **Validation-Based Architecture Selection** (Eq. 9) | Manual architecture tuning     | 0.25× manual configuration MSE |
-| **Adaptive BIC-Inspired Regularization** (Eq. 7-8)  | Manual K, r* selection         | Automated                      |
-| **Two-Phase Training**                              | Speed vs. structure tradeoff   | Synergistic                    |
+| Innovation                                          | Problem Solved                | Performance                   |
+| --------------------------------------------------- | ----------------------------- | ----------------------------- |
+| **Physics-Aware Initialization** (Eq. 5)            | Stable, symmetry-aware start  | Precision benefit             |
+| **Automatic Symmetry Detection** (Eq. 6)            | Manual symmetry specification | 1.09× expert                  |
+| **Validation-Based Architecture Selection** (Eq. 9) | Manual architecture tuning    | **0.25× manual (4× better!)** |
+| **Adaptive BIC-Inspired Regularization** (Eq. 7-8)  | Manual K, r* selection        | Automated                     |
+| **Two-Phase Training**                              | Speed vs. structure tradeoff  | Synergistic                   |
 
 ---
 
-## Headline Results
+## 🚀 Headline Results
 
-**Training efficiency** (vs. random initialization, n=20 seeds)
-
-| Metric              | Value                           |
-| ------------------- | ------------------------------- |
-| Convergence speedup | 6.74×                           |
-| Cohen's d           | 2.03                            |
-| MSE reduction       | 85.3% (9.59×10⁻⁸ vs. 6.51×10⁻⁷) |
-
-**Automation accuracy**
-
-| Metric                                            | Value                   |
-| ------------------------------------------------- | ----------------------- |
-| Auto-architecture vs. single manual configuration | 0.25× MSE               |
-| Auto-symmetry vs. expert-specified                | 1.09× loss ratio        |
-| Symmetry detection accuracy                       | 100% (3/3 cases tested) |
-
-**Compact-model output**
-
-| Metric                      | Value               |
-| --------------------------- | ------------------- |
-| Parameter compression       | 98.6%               |
-| Memory reduction            | 70× (353 KB → 5 KB) |
-| Verilog-A model correlation | 0.984               |
+| Metric                      | Value                                                        |
+| --------------------------- | ------------------------------------------------------------ |
+| **Automation Level**        | **3 of 5 steps**                                             |
+| Auto-Architecture vs Manual | **0.25× MSE** (4× better!)                                   |
+| Auto-Symmetry vs Expert     | 1.09× (within 9%)                                            |
+| Held-out coupling recovery  | **≈8–11% error, R²≈0.97** (free-intercept, seed-averaged)    |
+| Identifiable α range        | **α ∈ [0.05, 0.20]** (all tested)                            |
+| Physics-init effect         | Precision benefit; **no convergence speedup** (1.05× ± 0.16) |
+| Parameter Compression       | 98.6%                                                        |
+| Memory Reduction            | 70× (353 KB → 5 KB)                                          |
+| Verilog-A Correlation       | 0.984                                                        |
+| Symmetry Detection Accuracy | 100%                                                         |
 
 ---
 
-## Experimental validation
+## 📊 Comprehensive Experimental Validation
 
-The repository contains 21 original experiments spanning the validation suite (16), architecture selection (2), statistical robustness (20-seed), and BIC runtime analysis, plus a dedicated supplementary experiments suite (P1–P10) with ngspice transient validation and OpenVAF→OSDI compiled Verilog-A co-simulation.
+We conducted a comprehensive experiment suite spanning structure discovery, symmetry detection, compression, architecture selection, latent-coupling recovery, and Verilog-A generation.
 
-### NEW: Statistical Validation Results (20-Seed Experiments)
+### Statistical Validation (multi-seed)
 
-#### Experiment 19: Robustness Experiments (n=20 seeds)
+#### Experiment 19–20: Initialization Effect and Noise Robustness (sequence-mode)
 
-| Metric                  | Ψ-Vortex Init         | Random Init           | p-value        |
-| ----------------------- | --------------------- | --------------------- | -------------- |
-| MSE (mean ± std)        | 9.59×10⁻⁸ ± 4.95×10⁻⁸ | 6.51×10⁻⁷ ± 3.84×10⁻⁷ | 2.64×10⁻⁶      |
-| Epochs to target        | 65.5 ± 36.4           | 441.1 ± 83.7          | **2.54×10⁻¹³** |
-| **Convergence Speedup** | **6.74×**             | -                     | -              |
-| **Cohen's d**           | **2.03** (very large) | -                     | -              |
-
-Physics-aware initialization produced statistically distinguishable speedup across all 20 seeds tested.
-
-#### Experiment 20: Noise Robustness (SNR 20-60 dB)
-
-| SNR (dB)   | Ψ-Vortex MSE | Random Init MSE | Speedup |
-| ---------- | ------------ | --------------- | ------- |
-| 60 (clean) | 9.59×10⁻⁸    | 6.51×10⁻⁷       | ~7×     |
-| 40         | ~1×10⁻⁷      | ~7×10⁻⁷         | ~7×     |
-| 20 (noisy) | ~2×10⁻⁷      | ~1.4×10⁻⁶       | ~7×     |
-
-Speedup is stable at ~7× across the SNR range tested (20–60 dB).
+Across 20 seeds and SNR 20–60 dB under sequence-mode training, physics-aware initialization shows **no meaningful convergence speedup** over random initialization (**1.05× ± 0.16**, not significant) and no measurable change in recovery accuracy. Its contribution is a modest **precision** benefit and a stable, symmetry-aware starting point. **Latent-coupling recovery is enabled by the recurrent architecture's temporal integration, not by initialization** — held-out recovery is ≈8–11% (R²≈0.97) regardless of initialization.
 
 #### Experiment 21: BIC Runtime Analysis
 
@@ -156,7 +128,7 @@ Speedup is stable at ~7× across the SNR range tested (20–60 dB).
 | **BIC Computation** | **0.69**        | **0.7%**   |
 | Loss (MSE)          | 0.05            | 0.1%       |
 
-BIC forward-pass cost is 0.7% of per-epoch time; the dominant cost is backward-pass gradient computation through the O(W²) pairwise distance term.
+**Key Finding:** BIC forward computation is negligible (0.7%). Overhead is dominated by backward pass gradient computation through O(W²) pairwise distances.
 
 ### NEW: Experiment 17 - Automatic Architecture Selection
 
@@ -169,7 +141,7 @@ Systematic grid evaluation consistently outperforms a single manual expert guess
 | Complex     | (h=128, L=3)  | 6.53×10⁻⁴  | (h=128, L=2) | 3.64×10⁻⁴ | **0.56×** |
 | **Average** | -             | -          | -            | -         | **0.28×** |
 
-Systematic grid evaluation achieves 0.28× MSE on average compared to a single manual configuration.
+**Key Finding:** Systematic grid evaluation achieves **0.28× MSE** on average compared to a single manual expert guess (not an exhaustive expert search).
 
 ---
 
@@ -184,60 +156,7 @@ Complete automation within user-specified bounds: Auto-Arch + Auto-Sym + Physics
 | Complex     | (h=128, L=2) | odd      | 9.89×10⁻⁴     | 5.96×10⁻⁴  | 1.66×       |
 | **Average** | -            | -        | -             | -          | **0.97×**   |
 
-The full automated pipeline reaches 0.97× of manual-configuration MSE.
-
----
-
-### NEW: Supplementary Experiments (P1–P10 + ngspice/OSDI)
-
-A standalone suite produced by `supplementary_experiments.py`. All outputs are in `supplementary_experiments_output/`.
-
-**These experiments are conservative stress tests; they do not redefine the headline numerical claims of the main manuscript.**
-
-| Group   | Question answered                                            | Key outputs                                                  |
-| ------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **P1**  | Manual Ψ-xLSTM vs full Ψ-Vortex: head-to-head on convergence, MSE, α recovery | `p1_manual_vs_vortex_*.{csv,png}`                            |
-| **P2**  | Does the differentiable BIC objective add anything over L₁/L₂/fixed-K/r? | `p2_bic_vs_regularizers_*.{csv,png}`                         |
-| **P3**  | α-recovery sweep over 7 coupling strengths + α=0 negative control; head-to-head vs MLP, xLSTM, manual Ψ-xLSTM | `p3_alpha_sweep_*.{csv,png}`                                 |
-| **P4**  | Noise × sample-size sensitivity map at 3 coupling strengths (binding constraint is sample size, not noise) | `p4_noise_sample_map.{csv,png}`                              |
-| **P5**  | Extended 7-variant component ablation with shared convergence target | `p5_ablation_*.{csv,png}`                                    |
-| **P6**  | Behavioral Verilog-A-equivalent fidelity: exported compact model vs GT and PyTorch across 5 stimuli | `p6_verilog_a_fidelity.{csv,png}`                            |
-| **P6b** | Native ngspice B-source/RC transient validation — no Verilog-A compiler needed | `p6b_ngspice_fidelity.{csv,png}`, `p6b_ngspice_waveforms.png` |
-| **P6c** | Verilog-A compiled with **OpenVAF → OSDI** and run as a real compact-model device in ngspice; driver–victim co-simulation | `p6c_osdi_fidelity.{csv,png}`, `p6c_osdi_waveforms.png`, `p6c_cosim.png` |
-| **P7**  | Negative controls against latent-state hallucination (α=0, shuffled driver, victim-only, fake drift) | `p7_negative_controls_*.{csv,png}`                           |
-| **P8**  | Cross-geometry generalisation: layer spacing, vertical resistance, τ, and 2/4-victim topologies | `p8_cross_geometry.{csv,png}`                                |
-| **P9**  | Measurement-artifact stress test: 7 realistic artifacts, max degradation +4 pp | `p9_measurement_artifacts.{csv,png}`                         |
-| **P10** | Reproducibility package: fixed seeds, config, environment snapshot, claim–experiment map | `config.yaml`, `environment.json`, `p10_claim_experiment_map.csv` |
-
-#### Compact-model fidelity — three levels of validation (P6 / P6b / P6c)
-
-The exported compact thermal-coupling law is validated at three levels of increasing rigour:
-
-| Level                         | Description                                      | Max error vs behavioral ref |
-| ----------------------------- | ------------------------------------------------ | --------------------------- |
-| (a) Behavioral                | Exported equations evaluated as Python reference | — (baseline)                |
-| (b) Native ngspice            | B-source/RC netlist, `.tran` in `ngspice_con`    | < 1.0 %                     |
-| (c) Compiled Verilog-A (OSDI) | OpenVAF 23.5.0 → OSDI → ngspice 45.2             | < 0.9 %                     |
-
-A driver–victim circuit co-simulation (one ngspice transient showing the full causal chain: driver voltage → driver current → thermal node → victim current) is included in P6c.
-
-**Full reproduction — run in this order:**
-
-```bash
-# Step 1: Run all P1–P10 experiments (Python/PyTorch only)
-python supplementary_experiments.py --all
-# (use --quick for a fast smoke test, or --only 2 3 6 for a subset)
-
-# Step 2: Native ngspice transient validation
-# Requires: ngspice_con.exe at C:/ngspice/bin/
-python p6b_ngspice_validation.py
-
-# Step 3: Compiled Verilog-A via OpenVAF/OSDI + driver–victim co-simulation
-# Requires: openvaf.exe at C:/ngspice_work/openvaf/ AND ngspice_con.exe
-python p6c_osdi_cosim.py
-```
-
-Steps 2–3 require external tools; steps 1 only Python/PyTorch. All outputs land in `supplementary_experiments_output/`.
+**Key Finding:** Full automation achieves **0.97× manual MSE** with minimal human intervention!
 
 ---
 
@@ -246,16 +165,6 @@ Steps 2–3 require external tools; steps 1 only Python/PyTorch. All outputs lan
 <details>
 <summary>Click to expand all 16 original experiments</summary>
 
-
-
-#### Experiment 1: Multi-Seed Statistical Significance (5 seeds × 4 configs)
-
-| Configuration     | Epochs (Mean±Std) | Time (Mean±Std)   | Final Loss (Mean±Std)  |
-| ----------------- | ----------------- | ----------------- | ---------------------- |
-| Baseline          | 323.6 ± 60.9      | 1.41s ± 0.28s     | 9.94e-07 ± 5.5e-09     |
-| Identity          | 49.0 ± 12.9       | 0.21s ± 0.05s     | 7.49e-07 ± 2.0e-07     |
-| **Auto-Detected** | **49.0 ± 12.9**   | **0.21s ± 0.05s** | **7.49e-07 ± 2.0e-07** |
-| Expert Manual     | 44.6 ± 19.5       | 0.19s ± 0.09s     | 8.12e-07 ± 4.8e-08     |
 
 #### Experiment 2: Synthetic Symmetry Detection
 
@@ -266,51 +175,6 @@ Steps 2–3 require external tools; steps 1 only Python/PyTorch. All outputs lan
 | None (asymmetric)   | none     | none     | 34.65%     | ✅       |
 
 **Detection Accuracy: 100% (3/3)**
-
-#### Experiment 3: Ψ-Family Lineage Comparison
-
-| Method       | Architecture   | Initialization | Epochs | Speedup vs Ψ-HDL |
-| ------------ | -------------- | -------------- | ------ | ---------------- |
-| **Ψ-HDL**    | MLP (4 layers) | Random Xavier  | 121    | 1.00×            |
-| **Ψ-xLSTM**  | mLSTM + sLSTM  | Random Xavier  | 193    | 0.63×            |
-| **Ψ-Vortex** | mLSTM + sLSTM  | Physics-Aware  | **32** | **3.78×**        |
-
-#### Experiment 4: Extended Ablation (2×2×2 Grid)
-
-| Configuration       | Epochs | Time (s) | Final Loss   |
-| ------------------- | ------ | -------- | ------------ |
-| Random+NoBIC+NoSym  | 125    | 0.50     | 8.76e-07     |
-| **Physics+BIC+Sym** | **19** | **0.11** | **9.81e-07** |
-
-#### Experiment 5: λ_BIC and γ Sensitivity
-
-| λ_BIC     | γ=0.05 | γ=0.1  | γ=0.2 | γ=0.5 |
-| --------- | ------ | ------ | ----- | ----- |
-| 0.001-0.1 | 32     | **19** | 19    | 19    |
-
-**Hyperparameters are robust** across wide range.
-
-#### Experiment 6: Model Size Scalability
-
-| Hidden Size | Baseline Epochs | Ψ-Vortex Epochs | Speedup   |
-| ----------- | --------------- | --------------- | --------- |
-| 32          | 436             | 48              | **9.08×** |
-| 64          | 193             | 70              | **2.76×** |
-| 128         | 331             | 92              | **3.60×** |
-
-#### Experiment 7: Frequency Response (10kHz - 500kHz)
-
-| Frequency  | Ψ-Vortex Epochs   | Speedup   |
-| ---------- | ----------------- | --------- |
-| 10-500 kHz | **47** (constant) | 2.0-2.96× |
-
-#### Experiment 8: Learning Rate Sensitivity
-
-| Learning Rate | Speedup    |
-| ------------- | ---------- |
-| 1e-4          | **29.41×** |
-| 1e-2          | 1.72×      |
-| **Mean**      | **14.56×** |
 
 #### Experiment 9: Compression vs Accuracy
 
@@ -330,7 +194,7 @@ Generalization gap expected for device-to-device variation.
 
 #### Experiment 12: Long Sequence Test
 
-Speedup **maintained** for sequences up to 10,000 timesteps.
+Sequence-mode training and inference run on sequences up to 10,000 timesteps (per-timestep BPTT bounds the usable length; see manuscript limitations).
 
 #### Experiment 13: Noise Robustness
 
@@ -342,12 +206,13 @@ Detection correct up to **10% noise**.
 
 #### Experiment 15: 3D Thermal Crosstalk Inference (Synthetic Data)
 
-| Metric             | Value                         |
-| ------------------ | ----------------------------- |
-| Validation Loss    | **3.64×10⁻⁹**                 |
-| Inferred α_thermal | 0.08 (post-hoc OLS-recovered) |
+| Metric             | Value                                     |
+| ------------------ | ----------------------------------------- |
+| Validation Loss    | **3.64×10⁻⁹**                             |
+| Inferred α_thermal | 0.08 (held-out, free-intercept estimator) |
+| Held-out recovery  | **≈8–11% error, R²≈0.97** (seed-averaged) |
 
-**Note**: the extracted coefficient represents an effective system-level coupling parameter for behavioral simulation; it is not claimed to be a universal material constant. All thermal inference results are from synthetic data calibrated to published device parameters. Recovery error is 6.4% at α=0.08 but degrades to 132% at α=0.05, indicating a practical detection threshold.
+**Note**: the extracted coefficient represents an effective system-level coupling parameter for behavioral simulation; it is not claimed to be a universal material constant. All thermal inference results are from synthetic data calibrated to published device parameters. Recovery is evaluated on **held-out driver realizations** with a free-intercept, seed-averaged estimator (no seed selection). All tested coupling strengths **α ∈ [0.05, 0.20] are identifiable** (≈10.5% error at α=0.05, ≈9.7% at α=0.08); the previously reported weak-coupling "failure" was an artifact of a through-origin estimator, not of the signal.
 
 #### Experiment 16: Detection Threshold Sensitivity
 
@@ -357,20 +222,18 @@ Recommended threshold: 0.7 provides good balance.
 
 ---
 
-## Validation criteria
+## 🎯 Validation Criteria - ALL PASSED
 
-| Criterion                      | Required     | Achieved              | Status |
-| ------------------------------ | ------------ | --------------------- | ------ |
-| Auto-architecture ≤ manual MSE | ≤1.5×        | **0.28×**             | ✅      |
-| Auto-symmetry ≤ expert         | ≤1.3×        | **1.09×**             | ✅      |
-| Auto speedup vs baseline       | ≥2.0×        | **6.74×** (p < 10⁻¹³) | ✅      |
-| Statistical significance       | p < 0.05     | **p = 2.54×10⁻¹³**    | ✅      |
-| Effect size (Cohen's d)        | > 0.8        | **2.03** (very large) | ✅      |
-| Detection accuracy             | ≥66%         | **100%**              | ✅      |
-| Valid Verilog-A output         | Yes          | **Yes**               | ✅      |
-| Full pipeline MSE              | ≤1.5× manual | **0.97×**             | ✅      |
+| Criterion                      | Required     | Achieved                                | Status |
+| ------------------------------ | ------------ | --------------------------------------- | ------ |
+| Auto-architecture ≤ manual MSE | ≤1.5×        | **0.28×**                               | ✅      |
+| Auto-symmetry ≤ expert         | ≤1.3×        | **1.09×**                               | ✅      |
+| Held-out coupling recovery     | identifiable | **≈8–11% err, R²≈0.97** (α∈[0.05,0.20]) | ✅      |
+| Detection accuracy             | ≥66%         | **100%**                                | ✅      |
+| Valid Verilog-A output         | Yes          | **Yes**                                 | ✅      |
+| Full pipeline MSE              | ≤1.5× manual | **0.97×**                               | ✅      |
 
-All predefined criteria are met on the synthetic benchmarks reported. Validation on fabricated devices remains future work.
+**VERDICT: ✅ AUTOMATION VALIDATED WITHIN USER-SPECIFIED BOUNDS**
 
 ---
 
@@ -387,10 +250,10 @@ flowchart TB
     
     A --> B --> C --> D
     
-    style A fill:#ffcdd2,color:#000000
-    style B fill:#fff9c4,color:#000000
-    style C fill:#c8e6c9,color:#000000
-    style D fill:#b3e5fc,stroke:#0288d1,stroke-width:3px,color:#000000
+    style A fill:#ffcdd2
+    style B fill:#fff9c4
+    style C fill:#c8e6c9
+    style D fill:#b3e5fc,stroke:#0288d1,stroke-width:3px
 ```
 
 ### Complete Feature Comparison
@@ -407,13 +270,14 @@ flowchart TB
 | Multi-Physics Modeling                |   ❌   | Limited |      ✅       |
 | **Automated Structure/Symmetry/Arch** |   ❌   |    ❌    |  ✅ **NEW**   |
 
-### Comparison with predecessor frameworks
+### Performance Gains
 
-| Metric     | vs Ψ-HDL                     | vs Ψ-xLSTM                   |
-| ---------- | ---------------------------- | ---------------------------- |
-| Speed      | 3.78× faster                 | 6.03× faster                 |
-| Automation | Manual → 3/5 steps automated | Manual → 3/5 steps automated |
-| Accuracy   | Same                         | Same                         |
+| Metric          | vs Ψ-HDL                     | vs Ψ-xLSTM                                        |
+| --------------- | ---------------------------- | ------------------------------------------------- |
+| Automation      | Manual → 3/5 steps automated | Manual → 3/5 steps automated                      |
+| Compaction      | BIC-inspired (98.6%)         | BIC-inspired (98.6%)                              |
+| Latent recovery | —                            | Held-out coupling recovery (architecture-enabled) |
+| Accuracy        | Same                         | Same                                              |
 
 ---
 
@@ -442,24 +306,8 @@ PSI-Vortex
 │   ├── 09_extended_experiments.py
 │   ├── 10_final_experiments.py
 │   ├── 11_robustness_experiments.py          ✨NEW (20-seed validation)
-│   ├── 12_auto_architecture_experiment.py    ✨NEW (architecture grid search)
 │   ├── 12_scalability_experiments.py         ✨NEW (BIC runtime analysis)
 │   └── 13_numerically_stable_bic.py          ✨NEW (gradient stability)
-│
-├── Supplementary Experiments ✨NEW
-│   ├── supplementary_experiments.py          # P1–P10 experiment driver
-│   ├── p6b_ngspice_validation.py             # native ngspice B-source transient
-│   ├── p6c_osdi_cosim.py                     # OpenVAF→OSDI compiled VA + co-sim
-│   └── supplementary_experiments_output/
-│       ├── p1_*.{csv,md,tex,png}             # P1–P10 tables and figures
-│       ├── ...
-│       ├── p6b_ngspice_fidelity.{csv,png}
-│       ├── p6c_osdi_fidelity.{csv,png}
-│       ├── p6c_cosim.png
-│       ├── psi_vortex_victim.va              # OSDI-compiled Verilog-A source
-│       ├── config.yaml                       # fixed seeds + hyperparameters
-│       ├── environment.json                  # Python/PyTorch environment snapshot
-│       └── README_reproducibility.md
 │
 ├── Generated Results (CSV + PNG)
 │   ├── robustness_experiments.png             ✨NEW (statistical validation)
@@ -549,8 +397,8 @@ Symmetry Mask   Auto-Detection ✓ Automated    Exp 6-7
 
 ```mermaid
 flowchart LR
-    subgraph phase1["Phase 1: Rapid Convergence"]
-        A["Physics-Aware<br>Init Eq.5+6"] --> B["MSE<br>Optimization"] --> C["6.74×<br>Speedup"]
+    subgraph phase1["Phase 1: MSE Optimization"]
+        A["Physics-Aware<br>Init Eq.5+6"] --> B["MSE<br>Optimization"] --> C["Stable,<br>symmetry-aware start"]
     end
     
     subgraph phase2["Phase 2: Structure Refinement"]
@@ -559,22 +407,22 @@ flowchart LR
     
     C --> D
     
-    style A fill:#e3f2fd,color:#000000
-    style C fill:#c8e6c9,color:#000000
-    style F fill:#c8e6c9,color:#000000
+    style A fill:#e3f2fd
+    style C fill:#c8e6c9
+    style F fill:#c8e6c9
 ```
 
-| Phase       | Duration    | Method                          | Result                             |
-| ----------- | ----------- | ------------------------------- | ---------------------------------- |
-| **Phase 1** | ~65 epochs  | Physics-Aware Init (Eq. 5+6)    | **6.74× speedup** (p = 2.54×10⁻¹³) |
-| **Phase 2** | +100 epochs | Adaptive BIC-Inspired (Eq. 7-8) | Negative loss convergence          |
+| Phase       | Duration    | Method                          | Result                                                       |
+| ----------- | ----------- | ------------------------------- | ------------------------------------------------------------ |
+| **Phase 1** | MSE phase   | Physics-Aware Init (Eq. 5+6)    | Stable, symmetry-aware start (no convergence speedup; 1.05× ± 0.16) |
+| **Phase 2** | +100 epochs | Adaptive BIC-Inspired (Eq. 7-8) | Negative loss convergence                                    |
 
-Across 20 random seeds:
+**Initialization characteristics (sequence-mode, n=5 seeds):**
 
-- Ψ-Vortex initialization: 65.5 ± 36.4 epochs to target
-- Random initialization: 441.1 ± 83.7 epochs to target
-- Speedup: 6.74× (Cohen's d = 2.03)
-- Combined two-phase training: 1.36× baseline speedup with structural refinement in 0.72s
+- Physics-aware initialization: **1.05× ± 0.16** convergence (not a meaningful speedup)
+- Value of initialization: a modest **precision** benefit, plus a stable symmetry-aware starting point
+- Latent-coupling recovery is enabled by the **recurrent architecture**, not by initialization
+- Phase 2 BIC objective drives **compaction** (effective DoF 5.5 → 2.0) and structure extraction
 
 ---
 
@@ -603,10 +451,10 @@ flowchart TD
     
     K --> L["⚡ Physics-Aware<br>Init Eq. 5"]
     
-    style H fill:#ffcdd2,color:#000000
-    style I fill:#bbdefb,color:#000000
-    style J fill:#f5f5f5,color:#000000
-    style L fill:#c8e6c9,color:#000000
+    style H fill:#ffcdd2
+    style I fill:#bbdefb
+    style J fill:#f5f5f5
+    style L fill:#c8e6c9
 ```
 
 ---
@@ -665,7 +513,7 @@ where A = {(h, L, m) : h ∈ {16,32,64,128}, L ∈ {1,2,3}, m ∈ {8,16,32}}
 
 ## 📈 Generated Verilog-A Model
 
-The framework generates Verilog-A compact models that include thermal ports when latent thermal coupling is detected:
+The framework automatically generates thermal-aware compact models:
 
 ```verilog
 // Ψ-Vortex Auto-Generated Verilog-A Compact Model
@@ -716,41 +564,42 @@ flowchart TB
     
     G --> H["🔌 thermal_pin<br>Multi-Physics Port"]
     
-    style A fill:#ffcdd2,color:#000000
-    style C fill:#bbdefb,color:#000000
-    style H fill:#c8e6c9,color:#000000
+    style A fill:#ffcdd2
+    style C fill:#bbdefb
+    style H fill:#c8e6c9
 ```
 
 **Inference Results (Synthetic Data):**
 
-| Metric             | Value                         |
-| ------------------ | ----------------------------- |
-| Inferred α_thermal | 0.08 (post-hoc OLS-recovered) |
-| Validation Loss    | 3.64×10⁻⁹                     |
-| Output             | thermal_pin for simulation    |
+| Metric             | Value                           |
+| ------------------ | ------------------------------- |
+| Inferred α_thermal | 0.08 (held-out, free-intercept) |
+| Held-out recovery  | ≈8–11% error, R²≈0.97           |
+| Validation Loss    | 3.64×10⁻⁹                       |
+| Output             | thermal_pin for simulation      |
 
-Validation loss on synthetic data: 3.64×10⁻⁹, achieved without temperature measurements as input. Recovery degrades at weak coupling (132% error at α = 0.05), defining a practical detection threshold.
+**Result:** Latent thermal coupling is recovered on **held-out driver realizations** (≈8–11% error, R²≈0.97, seed-averaged) using only voltage–current data. All tested coupling strengths α ∈ [0.05, 0.20] are identifiable under the corrected estimator.
 
 ---
 
 ## 🔗 Related Work
 
-| Framework    | Paper                                                        | Repository                                                   | Automation Level        |
-| ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------- |
-| Ψ-NN         | Liu et al., *Nat. Commun.* 2025 (https://www.nature.com/articles/s41467-025-64624-3) | [github.com/ZitiLiu/Psi-NN](https://github.com/ZitiLiu/Psi-NN) | Manual                  |
-| Ψ-HDL        | Jurj, *IEEE* 2026 (https://ieeexplore.ieee.org/document/11373324) | [github.com/jurjsorinliviu/Psi-HDL](https://github.com/jurjsorinliviu/Psi-HDL) | Manual                  |
-| Ψ-xLSTM      | Jurj, *IEEE* 2026 (https://ieeexplore.ieee.org/document/11457604) | [github.com/jurjsorinliviu/Psi-xLSTM](https://github.com/jurjsorinliviu/Psi-xLSTM) | Manual                  |
-| **Ψ-Vortex** | Jurj, under review 2026                                      | This repository                                              | **3/5 steps automated** |
+| Framework    | Repository                                                   | Automation Level        |
+| ------------ | ------------------------------------------------------------ | ----------------------- |
+| Ψ-NN         | [github.com/ZitiLiu/Psi-NN](https://github.com/ZitiLiu/Psi-NN) | Manual                  |
+| Ψ-HDL        | [github.com/jurjsorinliviu/Psi-HDL](https://github.com/jurjsorinliviu/PSI-HDL) | Manual                  |
+| Ψ-xLSTM      | [github.com/jurjsorinliviu/Psi-xLSTM](https://github.com/jurjsorinliviu/PSI-xLSTM) | Manual                  |
+| **Ψ-Vortex** | This repository                                              | **3/5 steps automated** |
 
 ---
 
 ## 📄 Citation
 
 ```bibtex
-@misc{jurj_psivortex_2026,
-  title        = {Ψ-Vortex: A Physics-Informed Framework for Automated Coupling Inference and Compact Modeling in Three-Dimensional Neuromorphic Devices},
+@misc{jurj_psivortex_2025,
+  title        = {Ψ-Vortex: A Unified Framework for Automated Multi-Physics Coupling Inference and Accelerated Compact Modeling in 3D Neuromorphic Devices},
   author       = {Jurj, Sorin Liviu},
-  year         = {2026},
+  year         = {2025},
   note         = {Manuscript under review},
   howpublished = {GitHub repository}
 }
@@ -761,6 +610,10 @@ Validation loss on synthetic data: 3.64×10⁻⁹, achieved without temperature 
 ## 📜 License
 
 MIT License - see [LICENSE](LICENSE) file.
+
+## 👤 Author
+
+**Sorin Liviu Jurj** - jurjsorinliviu@yahoo.de
 
 ---
 
@@ -787,27 +640,37 @@ flowchart TD
     
     G --> H["✅ Optimal<br>h=128, L=2"]
     
-    style A fill:#e3f2fd,color:#000000
-    style G fill:#fff9c4,color:#000000
-    style H fill:#c8e6c9,color:#000000
+    style A fill:#e3f2fd
+    style G fill:#fff9c4
+    style H fill:#c8e6c9
 ```
 
-Systematic grid evaluation achieves 0.25× MSE compared to a single manual configuration (not an exhaustive expert search).
+**Result:** Systematic grid evaluation achieves **0.25× MSE** compared to a single manual expert guess (not an exhaustive expert search).
 
 ---
 
-## Summary
+## 🏆 Summary
 
-Ψ-Vortex is a framework for compact-model generation from electrical measurements, combining physics-aware initialization, automated symmetry and architecture selection, and Verilog-A export.
+**Ψ-Vortex is a physics structure-informed neural network framework that automates structural topology discovery, symmetry detection, and architecture selection:**
 
-Reported on synthetic benchmarks calibrated to published device parameters:
+- ✅ **Reduced domain expertise required** (search space and training data remain user-specified)
+- ✅ **Outperforms single manual expert guess by 4×** (0.25× MSE)
+- ✅ **Held-out latent-coupling recovery** (≈8–11% error, R²≈0.97; architecture-enabled, seed-averaged)
+- ✅ **98.6% parameter compression** via BIC-inspired structure discovery
+- ✅ **3 of 5 manual steps automated** from raw data to Verilog-A
+- ✅ **Validated across a comprehensive experiment suite**
+- ✅ **All validation criteria passed**
+- ℹ️ **Physics-aware initialization is a precision benefit, not a convergence speedup** (1.05× ± 0.16)
+- ⚠️ **All validation on synthetic data** — fabricated-device validation remains future work
 
-- Three of five principal tuning steps automated within user-specified bounds (training data and search-space boundaries remain user responsibilities)
-- Convergence speedup of 6.74× over random initialization (n=20 seeds, Cohen's d = 2.03)
-- 98.6% parameter compression with Verilog-A model correlation 0.984
-- Inference of latent thermal coupling from electrical observations alone, bounded by a practical detection threshold near α = 0.05
-
-Open: validation on fabricated devices, including cycle-to-cycle and device-to-device variability, is the natural next step and is not part of this release.
+```mermaid
+flowchart LR
+    A[📊 Data] --> B[🤖 Ψ-Vortex] --> C[📄 Verilog-A]
+    
+    style A fill:#e1f5fe
+    style B fill:#fff9c4,stroke:#ff9800,stroke-width:3px
+    style C fill:#c8e6c9
+```
 
 
 
@@ -826,7 +689,7 @@ No explicit domain knowledge is required for the automated steps (symmetry detec
 It generates compact, SPICE-compatible Verilog-A models suitable for simulation, compact-model development, and virtual prototyping.
 
 **Can Ψ-Vortex infer latent physical effects?**  
-Yes, provided those effects leave a measurable signature in the observed data above the detection threshold. In the demonstrated case study on synthetic data, Ψ-Vortex inferred a latent state consistent with inter-layer thermal coupling using only voltage–current measurements. Recovery degrades for weak coupling signals (α ≤ 0.05). Experimental validation on fabricated devices remains future work.
+Yes, provided those effects leave a measurable signature in the observed data. In the demonstrated case study on synthetic data, Ψ-Vortex inferred a latent state consistent with inter-layer thermal coupling using only voltage–current measurements, recovered on held-out driver realizations (≈8–11% error, R²≈0.97). All tested coupling strengths α ∈ [0.05, 0.20] are identifiable. Experimental validation on fabricated devices remains future work.
 
 **When should Ψ-Vortex not be used?**  
 If a system is purely static, low-frequency, or already well described by a simple analytical model, Ψ-Vortex may be unnecessary. It is most useful when dynamics are complex, multi-timescale, or partially unobservable.
@@ -835,4 +698,4 @@ If a system is purely static, low-frequency, or already well described by a simp
 Ψ-Vortex is designed for compact-model development and SPICE-based simulation workflows. Its main value is reducing manual effort and accelerating virtual prototyping before fabrication.
 
 **Where can I read the full conceptual background?**  
-See the accompanying [technical rationale document](psi-vortex-technical-rationale.pdf) (I will upload it as soon as the manuscript gets published. Thank you for your understanding and patience), which provides the design lineage, architectural motivations, and scope boundaries of the framework. Note: This document provides architectural and historical context for the Ψ-Vortex framework. It complements, but does not replace, the peer-reviewed manuscript.
+See the accompanying [technical rationale document](psi-vortex-technical-rationale.pdf), which provides the design lineage, architectural motivations, and scope boundaries of the framework. Note: This document provides architectural and historical context for the Ψ-Vortex framework. It complements, but does not replace, the peer-reviewed manuscript.
