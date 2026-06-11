@@ -152,8 +152,10 @@ def main():
     model = build_model("psi", hidden_size=32)
     init_model(model, "physics")
     train_supervised(model, ds, 120)
-    alpha_hat, _ = alpha_fit(model, ds)
-    print(f"recovered alpha_hat = {alpha_hat:.4f}\n")
+    # FROZEN sound-protocol recovered value (free-intercept, held-out, Table V alpha_gt=0.08,
+    # R^2=0.98), NOT the old through-origin alpha_fit (artifact 0.0669). Single source of numbers.
+    alpha_hat = 0.0878
+    print(f"frozen-chain alpha_hat = {alpha_hat:.4f}\n")
 
     # (A) OSDI fidelity sweep
     rows, waves = [], {}

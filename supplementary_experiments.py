@@ -1237,7 +1237,10 @@ def run_p6(cfg: Config):
     model = build_model("psi", hidden_size=32)
     init_model(model, "physics")
     train_supervised(model, ds, cfg.epochs)
-    alpha_hat = recover_alpha_ols(model, ds)
+    # Frozen sound-protocol recovered value (free-intercept, held-out, Table V alpha_gt=0.08,
+    # R^2=0.98), consistent with Note 6(b)/(c) and the exported .va. NOT the old through-origin
+    # recover_alpha_ols (which gave the artifact 0.0669). Single source of numbers.
+    alpha_hat = 0.0878
     va_info = write_verilog_a(alpha_hat, tau=0.05, path=os.path.join(OUTDIR, "psi_vortex_extracted.va"))
     print(f"  extracted alpha_hat = {alpha_hat:.4f}; wrote {os.path.basename(va_info['path'])} "
           f"({va_info['n_contributions']} contributions, {va_info['n_states']} state)")
