@@ -1,0 +1,23 @@
+\begin{tabular}{rrrrc}
+\toprule
+$N_{train}$ & noise \% & $\alpha$ err \% & held-out $R^2$ & identifiable \\
+\midrule
+250 & 0 & 7.9 & 0.52 & no \\
+250 & 2 & 13.9 & 0.64 & no \\
+250 & 5 & 10.9 & 0.64 & no \\
+250 & 10 & 21.2 & 0.48 & no \\
+500 & 0 & 2.1 & 0.90 & yes \\
+500 & 2 & 2.1 & 0.89 & yes \\
+500 & 5 & 2.3 & 0.87 & yes \\
+500 & 10 & 1.8 & 0.87 & yes \\
+750 & 0 & 2.7 & 0.92 & yes \\
+750 & 2 & 3.7 & 0.94 & yes \\
+750 & 5 & 1.5 & 0.92 & yes \\
+750 & 10 & 2.2 & 0.92 & yes \\
+1250 & 0 & 10.2 & 0.97 & yes \\
+1250 & 2 & 9.3 & 0.97 & yes \\
+1250 & 5 & 9.5 & 0.97 & yes \\
+1250 & 10 & 7.2 & 0.98 & yes \\
+\bottomrule
+\end{tabular}
+% Detection regime at alpha=0.08. Boundary: identifiable for n_train >= 500 across noise up to 10%.

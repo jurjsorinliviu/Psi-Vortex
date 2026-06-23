@@ -1,0 +1,10 @@
+\begin{tabular}{lccccc}
+\toprule
+Scenario & $\alpha_{gt}$ & best held-out $R^2$ & seeds passing & decision & un-gated $\alpha$ \\
+\midrule
+S1 genuine + recurrent & 0.08 & 0.90 & 3/3 & ACCEPT ($\alpha$=0.081) & 0.080 \\
+S2 genuine + MLP & 0.08 & 0.00 & 0/3 & ABSTAIN & 0.002 \\
+S3 alpha=0 control & 0.00 & 0.18 & 0/3 & ABSTAIN & -0.000 \\
+\bottomrule
+\end{tabular}
+% Gate = min held-out R^2 for an interpretable readout. ABSTAIN prevents the silent emission of an unreliable coupling value.

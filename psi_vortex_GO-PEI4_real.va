@@ -1,0 +1,57 @@
+// ============================================================
+// Ψ-Vortex Auto-Generated Verilog-A Compact Model
+// Generated: 2026-06-21 17:10:12
+// Symmetry: ODD (detected with 75.0% confidence)
+// Model Type: Memristor with I(-V) = -I(V)
+// ============================================================
+`include "disciplines.vams"
+`include "constants.vams"
+
+module psi_vortex_auto(p, n);
+    inout p, n;
+    electrical p, n;
+    
+    // ============================================================
+    // Extracted Physics Parameters (Ψ-Vortex BIC-optimized)
+    // ============================================================
+    parameter real r_off = 1.615609e+00;   // Off-state resistance [Ohm]
+    parameter real r_on = 9.997587e-01;     // On-state resistance [Ohm]
+    parameter real alpha = 4.439640e+01;    // Nonlinearity coefficient
+    parameter real tau = 1.145990e-01;        // Switching time constant [s]
+    
+    // Internal state variable
+    real x;  // Normalized state [0, 1]
+    
+    analog begin
+        real V_in, I_mem, R_mem, dxdt;
+        
+        // Input voltage
+        V_in = V(p, n);
+        
+        // ============================================================
+        // ODD SYMMETRY: I(-V) = -I(V)
+        // Physical basis: Ionic drift reverses with voltage polarity
+        // ============================================================
+        
+        // State-dependent resistance
+        R_mem = r_off - x * (r_off - r_on);
+        
+        // Memristor current (sinh ensures odd symmetry)
+        // sinh(x) is odd: sinh(-x) = -sinh(x)
+        I_mem = V_in / R_mem * (1 + 0.1 * sinh(alpha * V_in));
+        
+        // State dynamics: dx/dt = f(V, x)
+        // Ensures odd symmetry: f(-V, x) produces mirrored dynamics
+        dxdt = (1.0/tau) * sinh(alpha * V_in) * (1 - x);
+        
+        // Output current
+        I(p, n) <+ I_mem;
+        
+        // State evolution (implicit integration)
+        x = idt(dxdt, 0.5);  // Start at mid-state
+        
+        // Clamp state to valid range
+        if (x < 0.0) x = 0.0;
+        if (x > 1.0) x = 1.0;
+    end
+endmodule

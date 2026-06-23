@@ -1,0 +1,14 @@
+\begin{tabular}{rrrrrr}
+\toprule
+$W$ & full DoF & mini-batch DoF & RFF DoF & mini-batch err & RFF err \\
+\midrule
+500 & 5.20 & 5.28 & 5.60 & 1.6\% & 7.8\% \\
+1000 & 5.19 & 5.24 & 5.59 & 0.8\% & 7.6\% \\
+2000 & 5.19 & 5.21 & 5.59 & 0.4\% & 7.6\% \\
+5000 & 5.19 & 5.23 & 5.59 & 0.7\% & 7.7\% \\
+8000 & 5.19 & 5.26 & 5.59 & 1.2\% & 7.7\% \\
+20000 & -- & 5.29 & 5.59 & -- & -- \\
+50000 & -- & 5.26 & 5.60 & -- & -- \\
+\bottomrule
+\end{tabular}
+% gamma=0.1, B=512, D=512. Exact O(W^2) skipped beyond W=8000 (memory). Gradient cosine vs exact: mini-batch=0.724, RFF=0.950.

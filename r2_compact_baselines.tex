@@ -1,0 +1,11 @@
+\begin{tabular}{lccccc}
+\toprule
+Method & real GO-PDADMAC4 & real GO-PEI3 & real GO-PEI4 & synthetic (printed memristor) & Params \\
+\midrule
+Psi-Vortex (teacher) & 0.041$\pm$0.002 & 0.003$\pm$0.000 & 0.033$\pm$0.002 & 0.072$\pm$0.001 & 63329 \\
+MLP & 0.043$\pm$0.002 & 0.003$\pm$0.000 & 0.032$\pm$0.002 & 0.078$\pm$0.001 & 8577 \\
+PIKAN & 0.046$\pm$0.005 & 0.007$\pm$0.001 & 0.037$\pm$0.003 & 0.053$\pm$0.009 & 540 \\
+SINDy & 0.043$\pm$0.000 & 0.010$\pm$0.000 & 0.042$\pm$0.000 & 0.082$\pm$0.000 & 3 \\
+\bottomrule
+\end{tabular}
+% Held-out NRMSE (mean$\pm$std over 3 equal seeds); lower is better. Params = native model size (SINDy = active terms).
