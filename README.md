@@ -1,4 +1,4 @@
-# Ψ-Vortex: A Unified Framework for Automated Multi-Physics Coupling Inference and Accelerated Compact Modeling in 3D Neuromorphic Devices
+# Ψ-Vortex: Structure-Regularized Recurrent Learning for Latent Thermal-Coupling Inference and Verilog-A Compact Modeling of 3D Neuromorphic Devices
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.0+](https://img.shields.io/badge/pytorch-2.0+-red.svg)](https://pytorch.org/)
@@ -11,7 +11,7 @@
 > This repository contains implementation code, experiments, and technical documentation accompanying a manuscript under peer review.  
 > The manuscript is the authoritative source for formal claims, definitions, and evaluation.
 
-Ψ-Vortex is an automated framework for converting raw electrical measurement data into compact, high-fidelity Verilog-A models with minimal manual tuning. By combining recurrent temporal integration with information-theoretic structure discovery, it automates structure discovery, compresses model size, and enables latent-state inference from voltage–current data alone. Latent-coupling recovery is enabled by the recurrent architecture's temporal integration; physics-aware initialization provides a stable, symmetry-aware starting point and is reported as an ablation (no measurable convergence or recovery-accuracy advantage). Compact-model extraction is additionally validated on an **independent public dataset of measured memristors** (held-out and cross-device); the 3D thermal-coupling case study is a proof-of-concept on synthetic data calibrated to published device parameters, and experimental validation of the inferred thermal coupling on fabricated stacks remains future work. Head-to-head comparisons against contemporary baselines (a Kolmogorov–Arnold network, sparse identification, and an MLP) are also provided. The framework is designed for compact-model development, SPICE-compatible deployment, and virtual prototyping of complex electronic and multi-physics systems.
+Ψ-Vortex is a structure-regularized recurrent compact-modeling framework for converting electrical device data into compact, SPICE-compatible Verilog-A models with reduced manual tuning. It combines recurrent temporal integration, BIC-inspired structure regularization, automatic symmetry detection, validation-based architecture selection, and Verilog-A export. Latent-coupling recovery is enabled by recurrent temporal integration; physics-aware initialization provides a stable, symmetry-aware starting point and is reported as an ablation, with no measurable convergence or recovery-accuracy advantage. Compact-model extraction is additionally validated on an independent public dataset of measured memristors, while the 3D thermal-coupling case study remains a synthetic proof-of-concept calibrated to published device parameters. Experimental validation of inferred thermal coupling on fabricated 3D stacks remains future work. Head-to-head comparisons against contemporary baselines (a Kolmogorov–Arnold network, sparse identification, and an MLP) are also provided. The framework is designed for compact-model development, SPICE-compatible deployment, and virtual prototyping of complex electronic and multi-physics systems.
 
 ---
 
@@ -62,13 +62,13 @@ flowchart LR
 | Component                  | Method                   | Status      | Performance                                |
 | -------------------------- | ------------------------ | ----------- | ------------------------------------------ |
 | **Symmetry Mask (M_sym)**  | Auto-Detection (Eq. 6)   | ✅ Automated | 1.09× expert                               |
-| **Architecture (h, L, m)** | Validation-Based (Eq. 9) | ✅ Automated | **0.25× manual** (4× better!)              |
+| **Architecture (h, L, m)** | Validation-Based (Eq. 9) | ✅ Automated | **0.25× manual** (approximately 3.6× lower MSE than a single manual expert guess)              |
 | **Physics-Aware Init**     | Auto-Sym → Eq. 5         | ✅ Automated | Stable start; ablation (no speedup; 1.05×) |
 | **Clusters (K)**           | Adaptive BIC (Eq. 7-8)   | ✅ Automated | Negative loss convergence                  |
 | **Matrix Rank (r*)**       | Adaptive BIC (Eq. 7-8)   | ✅ Automated | 98.6% compression                          |
 | **Verilog-A Generation**   | Auto-Generation          | ✅ Automated | 0.984 correlation                          |
 
-*Note: Physics-Aware Initialization (Eq. 5) automatically uses the symmetry mask from Auto-Detection (Eq. 6), making the automated steps of the training pipeline fully automatic. Training data and search-space boundaries remain user-specified.*
+*Note: Physics-Aware Initialization (Eq. 5) automatically uses the symmetry mask from Auto-Detection (Eq. 6), making those selected steps automated within user-specified bounds. Training data and search-space boundaries remain user-specified.*
 
 ---
 
@@ -78,7 +78,7 @@ flowchart LR
 
 1. **Manual Tuning Bottleneck**: The reliance on domain expertise for structure extraction
 2. **Architecture Selection**: The need for expert knowledge to choose network size
-3. **Computational Bottleneck**: The prohibitive O(N²) complexity of training recurrent teachers, addressed via a physics-aware initialization hypothesis that was **not** supported under sequence-mode training (the mechanism is evaluated and reported as an ablation)
+3. **Computational Bottleneck**: Recurrent teachers remain computationally heavy; physics-aware initialization was tested as a possible remedy but is reported only as an ablation because it did not provide measurable sequence-mode acceleration.
 
 ### Key Innovations
 
@@ -86,7 +86,7 @@ flowchart LR
 | --------------------------------------------------- | -------------------------------- | ----------------------------- |
 | **Physics-Aware Initialization** (Eq. 5)            | Stable, symmetry-aware start     | Reported as ablation          |
 | **Automatic Symmetry Detection** (Eq. 6)            | Manual symmetry specification    | 1.09× expert                  |
-| **Validation-Based Architecture Selection** (Eq. 9) | Manual architecture tuning       | **0.25× manual (4× better!)** |
+| **Validation-Based Architecture Selection** (Eq. 9) | Manual architecture tuning       | **0.25× manual (approximately 3.6× lower MSE than a single manual expert guess)** |
 | **Adaptive BIC-Inspired Regularization** (Eq. 7-8)  | Manual K, r* selection           | Automated                     |
 | **Two-Phase Training**                              | Structural-refinement scheduling | Stable fit → compaction       |
 
@@ -97,7 +97,7 @@ flowchart LR
 | Metric                                     | Value                                                        |
 | ------------------------------------------ | ------------------------------------------------------------ |
 | **Automation Level**                       | **3 of 5 steps**                                             |
-| Auto-Architecture vs Manual                | **0.25× MSE** (4× better!)                                   |
+| Auto-Architecture vs Manual                | **0.25× MSE** (approximately 3.6× lower MSE than a single manual expert guess)                                   |
 | Auto-Symmetry vs Expert                    | 1.09× (within 9%)                                            |
 | Held-out coupling recovery                 | **≈8–11% error, R²≈0.97** (free-intercept, seed-averaged)    |
 | Identifiable α range                       | **α ∈ [0.05, 0.20]** (all tested)                            |
@@ -318,17 +318,17 @@ flowchart TB
 
 ### Complete Feature Comparison
 
-| Capability                            | Ψ-HDL | Ψ-xLSTM | **Ψ-Vortex** |
-| ------------------------------------- | :---: | :-----: | :----------: |
-| Structural Interpretability           |   ✅   |    ✅    |      ✅       |
-| Verilog-A Generation                  |   ✅   |    ✅    |      ✅       |
-| High-Frequency Fidelity               |   ❌   |    ✅    |      ✅       |
-| Two-Phase Structural Scheduling       |   ❌   |    ❌    |      ✅       |
-| Auto K, ε, r Selection                |   ❌   |    ❌    |      ✅       |
-| **Auto-Symmetry Detection**           |   ❌   |    ❌    |  ✅ **NEW**   |
-| **Auto-Architecture Selection**       |   ❌   |    ❌    |  ✅ **NEW**   |
-| Multi-Physics Modeling                |   ❌   | Limited |      ✅       |
-| **Automated Structure/Symmetry/Arch** |   ❌   |    ❌    |  ✅ **NEW**   |
+| Capability                                      | Ψ-HDL   | Ψ-xLSTM  | **Ψ-Vortex**  |
+| -------------------------------------           | :----:   | :-----: | :------------: |
+| Structural Interpretability                     |   ✅   |    ✅    |      ✅       |
+| Verilog-A Generation                            |   ✅   |    ✅    |      ✅       |
+| High-Frequency Fidelity                         |   ❌   |    ✅    |      ✅       |
+| Two-Phase Structural Scheduling                 |   ❌   |    ❌    |      ✅       |
+| Auto K, ε, r Selection                          |   ❌   |    ❌    |      ✅       |
+| **Auto-Symmetry Detection**                     |   ❌   |    ❌    |  ✅ **NEW**   |
+| **Auto-Architecture Selection**                 |   ❌   |    ❌    |  ✅ **NEW**   |
+| Synthetic latent thermal-coupling inference     |   ❌   |    ❌    |      ✅       |
+| **Automated Structure/Symmetry/Arch**           |   ❌   |    ❌    |  ✅ **NEW**   |
 
 ### Automated vs. Still-Manual Steps (3 of 5)
 
@@ -712,7 +712,7 @@ flowchart TB
 
 ```bibtex
 @misc{jurj_psivortex_2026,
-  title        = {Ψ-Vortex: A Unified Framework for Automated Multi-Physics Coupling Inference and Accelerated Compact Modeling in 3D Neuromorphic Devices},
+  title        = {Ψ-Vortex: Structure-Regularized Recurrent Learning for Latent Thermal-Coupling Inference and Verilog-A Compact Modeling of 3D Neuromorphic Devices},
   author       = {Jurj, Sorin Liviu},
   year         = {2026},
   note         = {Manuscript under review},
@@ -779,13 +779,13 @@ flowchart TD
 
 ## 🏆 Summary
 
-**Ψ-Vortex is a physics structure-informed neural network framework that automates structural topology discovery, symmetry detection, and architecture selection:**
+**Ψ-Vortex is a physics structure-informed recurrent compact-modeling framework that reduces manual structure selection through BIC-inspired regularization, symmetry detection, and validation-based architecture selection.**
 
 - ✅ **Reduced domain expertise required** (search space and training data remain user-specified)
 - ✅ **Outperforms single manual expert guess by 4×** (0.25× MSE)
 - ✅ **Held-out latent-coupling recovery** (≈8–11% error, R²≈0.97; architecture-enabled, seed-averaged)
 - ✅ **98.6% parameter compression** via BIC-inspired structure discovery
-- ✅ **3 of 5 manual steps automated** from raw data to Verilog-A
+- ✅ **3 of 5 principal manual steps reduced or automated** within user-specified bounds
 - ✅ **Validated across a comprehensive experiment suite**
 - ✅ **All validation criteria passed**
 - ✅ **Independent real-data validation** of compact modeling (measured memristors: held-out corr 0.993–1.000, cross-device ≥ 0.97)
@@ -815,7 +815,7 @@ No. Ψ-Vortex is a framework built on top of xLSTM that adds physics-aware initi
 Ψ-xLSTM demonstrated high-frequency device modeling, but still required manual tuning and expert intervention. Ψ-Vortex adds automated symmetry detection, architecture selection, automated structural compaction, and deployable structure extraction.
 
 **Does Ψ-Vortex require prior device-physics knowledge?**  
-No explicit domain knowledge is required for the automated steps (symmetry detection, architecture selection, structural topology). However, the user must specify training data, the architecture search space, and the BIC bandwidth. These inputs define the bounds within which automation operates.
+Ψ-Vortex reduces the need for manual structure specification, but it does not remove problem formulation. The user still supplies the training data, target physical setup, architecture search bounds, and BIC-related settings. In the thermal-coupling case study, the model is not given temperature measurements or coupling labels, but the benchmark itself is a defined thermal-crosstalk scenario.
 
 **What does Ψ-Vortex output?**  
 It generates compact, SPICE-compatible Verilog-A models suitable for simulation, compact-model development, and virtual prototyping.
