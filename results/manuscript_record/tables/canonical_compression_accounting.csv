@@ -1,0 +1,3 @@
+model,effective_trainable_values,expanded_parameters,expanded_parameter_bytes,serialized_artifact_bytes
+canonical_teacher,26273,26273,105092,
+clustered_gru_export,16,273,1092,14875.0

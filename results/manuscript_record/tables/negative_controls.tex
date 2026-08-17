@@ -1,0 +1,11 @@
+\begin{tabular}{lrrrrrrr}
+\toprule
+control & alpha\_true & alpha\_rec & r2 & test\_mse & model\_parameter\_count & seed & cluster\_count \\
+\midrule
+genuine & 0.08 & 0.087375 & 0.98121 & 0.024665 & 289 & 1 & 16 \\
+shuffled\_driver & 0.08 & 0.00019691 & 0.012458 & 0.65555 & 289 & 1 & 16 \\
+unrelated\_slow\_drift & 0 & -0.00013061 & 0.14386 & 0.0011469 & 289 & 1 & 16 \\
+victim\_only\_no\_driver & 0.08 & 0.0015638 & 0.039279 & 2.8789 & 278.33 & 1 & 5.3333 \\
+zero\_coupling & 0 & -6.3702e-06 & 0.023359 & 0.00067112 & 286.33 & 1 & 13.333 \\
+\bottomrule
+\end{tabular}

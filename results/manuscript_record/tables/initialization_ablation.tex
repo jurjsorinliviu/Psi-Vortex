@@ -1,0 +1,10 @@
+\begin{tabular}{llrrrrrrrrrrrr}
+\toprule
+benchmark & initialization & seed & shared\_target\_mse & epochs\_to\_target & speedup\_vs\_random & final\_train\_loss & validation\_mse & test\_mse & runtime\_s & model\_parameter\_count & alpha\_rec & r2 & cluster\_count \\
+\midrule
+printed\_memristor\_sequence\_convergence & baseline\_random & 145.4 & 1.0408 & 462 & 1 & 1.0598 & 1.0738 & 1.0807 & 4930.5 & 45585 & NaN & NaN & NaN \\
+printed\_memristor\_sequence\_convergence & physics\_odd\_corrected & 145.4 & 1.0408 & 6.8 & 116.58 & 0.047687 & 0.042048 & 0.044848 & 4982.3 & 45585 & NaN & NaN & NaN \\
+thermal\_recovery & physical\_retention & 1 & NaN & NaN & NaN & NaN & NaN & 0.17526 & 592.11 & 286.33 & 0.0789 & 0.97259 & 13.333 \\
+thermal\_recovery & random & 1 & NaN & NaN & NaN & NaN & NaN & 0.024665 & 581.92 & 289 & 0.087375 & 0.98121 & 16 \\
+\bottomrule
+\end{tabular}
