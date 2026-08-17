@@ -223,11 +223,11 @@ If the external tools are unavailable, the run records a skip and does not label
 Citation metadata are provided in [`CITATION.cff`](CITATION.cff).
 
 ```bibtex
-@misc{jurj_psivortex_2026,
+@misc{jurj_psi-vortex_2026,
   author = {Sorin Liviu Jurj},
   title = {Ψ-Vortex: Structure-Regularized Recurrent Learning for Latent Thermal-Coupling Inference and Verilog-A Compact Modeling of 3D Neuromorphic Devices},
   year = {2026},
-  note = {Version 2.0.4 reproducibility bundle}
+  note = {under review}
 }
 ```
 
