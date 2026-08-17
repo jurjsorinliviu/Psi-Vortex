@@ -1,0 +1,10 @@
+include CITATION.cff LICENSE README.md RECURRENCE_CONTRACT.md
+include requirements-lock.txt environment.yml
+recursive-include configs *.json
+recursive-include data *.csv *.xlsx *.txt
+recursive-include manifests *.csv
+recursive-include tools *.py
+recursive-include results/manuscript_record *
+recursive-include tests *.py
+recursive-include .github *.yml
+global-exclude __pycache__ *.py[cod]

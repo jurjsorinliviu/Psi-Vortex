@@ -1,0 +1,7 @@
+# Exact Python-package versions used by the Windows/Python 3.14 CUDA final run.
+torch==2.9.0
+numpy==2.3.4
+pandas==2.3.3
+matplotlib==3.10.7
+openpyxl==3.1.5
+jinja2==3.1.6
