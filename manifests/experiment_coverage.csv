@@ -1,0 +1,29 @@
+experiment_group,manuscript_evidence,canonical_output,external_requirement
+dataset_integrity,Input-record integrity,raw_results/dataset_integrity.csv,
+latent_recovery,Latent-coupling recovery sweep,raw_results/latent_recovery.csv,
+recurrence_controls,Chronological and matched recurrence controls,raw_results/recurrence_controls.csv,
+negative_controls,Acceptance and abstention controls,raw_results/negative_controls.csv,
+synthetic_baselines,Matched static and recurrent baselines,raw_results/synthetic_baselines.csv,
+rrad_ablation,RRAD component ablation,raw_results/rrad_ablation.csv,
+initialization_ablation,Initialization convergence and thermal fidelity,raw_results/initialization_ablation.csv,
+bic_structural_ablation,BIC and structural controls,raw_results/bic_structural_ablation.csv,
+architecture_search,Validation-only architecture selection,raw_results/architecture_search.csv,
+automatic_symmetry,Automatic symmetry and fallback behavior,raw_results/automatic_symmetry.csv,
+detection_regime,Source-count and noise grid,raw_results/detection_regime.csv,
+artifact_stress,Measurement-artifact sensitivity,raw_results/artifact_stress.csv,
+geometry_transfer,Geometry-transfer study,raw_results/geometry_transfer.csv,
+multilayer,Multilayer recovery limit,raw_results/multilayer.csv,
+measured_fidelity,Measured held-out fidelity,raw_results/measured_fidelity.csv,openpyxl
+measured_baselines,Measured-data baseline comparison,raw_results/measured_baselines.csv,openpyxl
+cross_device,Source-disjoint cross-device evaluation,raw_results/cross_device.csv,openpyxl
+cross_rate,Source-disjoint cross-rate evaluation,raw_results/cross_rate.csv,openpyxl
+compression_fidelity,Measured compression-fidelity sweep,raw_results/compression_fidelity.csv,openpyxl
+frequency_response,Pulse-width response,raw_results/frequency_response.csv,
+learning_rate_sensitivity,Learning-rate sensitivity,raw_results/learning_rate_sensitivity.csv,
+long_sequence,Long-sequence execution and gating,raw_results/long_sequence.csv,
+scalable_bic,Exact and approximate scalable BIC,raw_results/scalable_bic.csv,
+runtime_benchmark,Training and deployment runtime,raw_results/runtime_benchmark.csv,
+export_validation,Guarded batch and streaming export,raw_results/export_validation.csv,
+circuit_validation,Compiled Verilog-A and ngspice validation,raw_results/circuit_validation.csv,OpenVAF-reloaded and ngspice
+statistical_summary,Declared seed aggregates,raw_results/statistical_summary.csv,
+figures_and_tables,Generated manuscript artifacts,raw_results/figures_and_tables.csv,matplotlib
