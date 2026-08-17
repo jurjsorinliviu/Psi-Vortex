@@ -1,0 +1,51 @@
+﻿"stimulus","verilog_a_status","verilog_a_artifact","openvaf_status","openvaf_executable","openvaf_version","openvaf_returncode","openvaf_command","openvaf_stdout","openvaf_stderr","openvaf_artifact","openvaf_skip_reason","ngspice_status","ngspice_executable","ngspice_version","ngspice_version_label","ngspice_skip_reason","osdi_simulation_status","osdi_returncode","osdi_stdout","osdi_stderr","osdi_netlist","osdi_skip_reason","osdi_max_abs_error","osdi_mean_abs_error","circuit_claim_valid","max_abs_tolerance","checkpoint_path","checkpoint_hash","checkpoint_file_sha256","model_class","model_architecture","model_parameter_count","train_source_ids","validation_source_ids","test_source_ids","profile","execution_device","device","seed","cluster_count"
+"dc_read","generated","artifacts\psi_vortex_student.va","passed","openvaf-r","OpenVAF-reloaded 20260616-2-gc592eed6","0","openvaf-r artifacts/psi_vortex_student.va -o artifacts/psi_vortex_student.osdi","","Finished building psi_vortex_student.va in 0.29s","artifacts/psi_vortex_student.osdi","","available","ngspice","******
+** ngspice-45.2 : Circuit level simulation program
+** Compiled with KLU Direct Linear Solver
+** The U. C. Berkeley CAD Group
+** Copyright 1985-1994, Regents of the University of California.
+** Copyright 2001-2025, The ngspice team.
+** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html
+** Please file your bug-reports at https://ngspice.sourceforge.io/bugrep.html
+** Creation Date: Sep  6 2025   16:39:28
+******","ngspice-45.2","","passed","0","","","artifacts/ngspice/dc_read/osdi_validation.cir","","5.4624884643583727e-05","1.729317045689866e-05","True","0.001","checkpoints/circuit_seed42.pt","8d8aec3037e880c42fcc3eb1ad37e9f60302250d1ba3147f37c3e86909852b8f","fc3688553691016bbb10ed641862fd4b085dfc9faa9c537da5260914d47d061e","GloballyClusteredModel","{""class"": ""RecurrentStudent"", ""hidden_size"": 8, ""input_size"": 1, ""materialized_cluster_count"": 16, ""num_layers"": 1, ""output_size"": 1, ""parameters"": 289}","289","driver-42-tau0.05-heat800-artifactnone;driver-123-tau0.05-heat800-artifactnone;driver-456-tau0.05-heat800-artifactnone;driver-7-tau0.05-heat800-artifactnone;driver-99-tau0.05-heat800-artifactnone","driver-999-tau0.05-heat800-artifactnone","driver-777-tau0.05-heat800-artifactnone;driver-888-tau0.05-heat800-artifactnone;driver-555-tau0.05-heat800-artifactnone","final","cuda","cuda","42","16"
+"pulse_train","generated","artifacts\psi_vortex_student.va","passed","openvaf-r","OpenVAF-reloaded 20260616-2-gc592eed6","0","openvaf-r artifacts/psi_vortex_student.va -o artifacts/psi_vortex_student.osdi","","Finished building psi_vortex_student.va in 0.29s","artifacts/psi_vortex_student.osdi","","available","ngspice","******
+** ngspice-45.2 : Circuit level simulation program
+** Compiled with KLU Direct Linear Solver
+** The U. C. Berkeley CAD Group
+** Copyright 1985-1994, Regents of the University of California.
+** Copyright 2001-2025, The ngspice team.
+** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html
+** Please file your bug-reports at https://ngspice.sourceforge.io/bugrep.html
+** Creation Date: Sep  6 2025   16:39:28
+******","ngspice-45.2","","passed","0","","","artifacts/ngspice/pulse_train/osdi_validation.cir","","1.3786605834953392e-05","5.077452396166478e-06","True","0.001","checkpoints/circuit_seed42.pt","8d8aec3037e880c42fcc3eb1ad37e9f60302250d1ba3147f37c3e86909852b8f","fc3688553691016bbb10ed641862fd4b085dfc9faa9c537da5260914d47d061e","GloballyClusteredModel","{""class"": ""RecurrentStudent"", ""hidden_size"": 8, ""input_size"": 1, ""materialized_cluster_count"": 16, ""num_layers"": 1, ""output_size"": 1, ""parameters"": 289}","289","driver-42-tau0.05-heat800-artifactnone;driver-123-tau0.05-heat800-artifactnone;driver-456-tau0.05-heat800-artifactnone;driver-7-tau0.05-heat800-artifactnone;driver-99-tau0.05-heat800-artifactnone","driver-999-tau0.05-heat800-artifactnone","driver-777-tau0.05-heat800-artifactnone;driver-888-tau0.05-heat800-artifactnone;driver-555-tau0.05-heat800-artifactnone","final","cuda","cuda","42","16"
+"sinusoid","generated","artifacts\psi_vortex_student.va","passed","openvaf-r","OpenVAF-reloaded 20260616-2-gc592eed6","0","openvaf-r artifacts/psi_vortex_student.va -o artifacts/psi_vortex_student.osdi","","Finished building psi_vortex_student.va in 0.29s","artifacts/psi_vortex_student.osdi","","available","ngspice","******
+** ngspice-45.2 : Circuit level simulation program
+** Compiled with KLU Direct Linear Solver
+** The U. C. Berkeley CAD Group
+** Copyright 1985-1994, Regents of the University of California.
+** Copyright 2001-2025, The ngspice team.
+** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html
+** Please file your bug-reports at https://ngspice.sourceforge.io/bugrep.html
+** Creation Date: Sep  6 2025   16:39:28
+******","ngspice-45.2","","passed","0","","","artifacts/ngspice/sinusoid/osdi_validation.cir","","1.3373018188378438e-05","4.01654944321387e-06","True","0.001","checkpoints/circuit_seed42.pt","8d8aec3037e880c42fcc3eb1ad37e9f60302250d1ba3147f37c3e86909852b8f","fc3688553691016bbb10ed641862fd4b085dfc9faa9c537da5260914d47d061e","GloballyClusteredModel","{""class"": ""RecurrentStudent"", ""hidden_size"": 8, ""input_size"": 1, ""materialized_cluster_count"": 16, ""num_layers"": 1, ""output_size"": 1, ""parameters"": 289}","289","driver-42-tau0.05-heat800-artifactnone;driver-123-tau0.05-heat800-artifactnone;driver-456-tau0.05-heat800-artifactnone;driver-7-tau0.05-heat800-artifactnone;driver-99-tau0.05-heat800-artifactnone","driver-999-tau0.05-heat800-artifactnone","driver-777-tau0.05-heat800-artifactnone;driver-888-tau0.05-heat800-artifactnone;driver-555-tau0.05-heat800-artifactnone","final","cuda","cuda","42","16"
+"crosstalk_held_out","generated","artifacts\psi_vortex_student.va","passed","openvaf-r","OpenVAF-reloaded 20260616-2-gc592eed6","0","openvaf-r artifacts/psi_vortex_student.va -o artifacts/psi_vortex_student.osdi","","Finished building psi_vortex_student.va in 0.29s","artifacts/psi_vortex_student.osdi","","available","ngspice","******
+** ngspice-45.2 : Circuit level simulation program
+** Compiled with KLU Direct Linear Solver
+** The U. C. Berkeley CAD Group
+** Copyright 1985-1994, Regents of the University of California.
+** Copyright 2001-2025, The ngspice team.
+** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html
+** Please file your bug-reports at https://ngspice.sourceforge.io/bugrep.html
+** Creation Date: Sep  6 2025   16:39:28
+******","ngspice-45.2","","passed","0","","","artifacts/ngspice/crosstalk_held_out/osdi_validation.cir","","1.691448730478662e-05","6.939589794209243e-06","True","0.001","checkpoints/circuit_seed42.pt","8d8aec3037e880c42fcc3eb1ad37e9f60302250d1ba3147f37c3e86909852b8f","fc3688553691016bbb10ed641862fd4b085dfc9faa9c537da5260914d47d061e","GloballyClusteredModel","{""class"": ""RecurrentStudent"", ""hidden_size"": 8, ""input_size"": 1, ""materialized_cluster_count"": 16, ""num_layers"": 1, ""output_size"": 1, ""parameters"": 289}","289","driver-42-tau0.05-heat800-artifactnone;driver-123-tau0.05-heat800-artifactnone;driver-456-tau0.05-heat800-artifactnone;driver-7-tau0.05-heat800-artifactnone;driver-99-tau0.05-heat800-artifactnone","driver-999-tau0.05-heat800-artifactnone","driver-777-tau0.05-heat800-artifactnone;driver-888-tau0.05-heat800-artifactnone;driver-555-tau0.05-heat800-artifactnone","final","cuda","cuda","42","16"
+"ood_pulse","generated","artifacts\psi_vortex_student.va","passed","openvaf-r","OpenVAF-reloaded 20260616-2-gc592eed6","0","openvaf-r artifacts/psi_vortex_student.va -o artifacts/psi_vortex_student.osdi","","Finished building psi_vortex_student.va in 0.29s","artifacts/psi_vortex_student.osdi","","available","ngspice","******
+** ngspice-45.2 : Circuit level simulation program
+** Compiled with KLU Direct Linear Solver
+** The U. C. Berkeley CAD Group
+** Copyright 1985-1994, Regents of the University of California.
+** Copyright 2001-2025, The ngspice team.
+** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html
+** Please file your bug-reports at https://ngspice.sourceforge.io/bugrep.html
+** Creation Date: Sep  6 2025   16:39:28
+******","ngspice-45.2","","passed","0","","","artifacts/ngspice/ood_pulse/osdi_validation.cir","","1.2552301635659902e-05","4.060269615311051e-06","True","0.001","checkpoints/circuit_seed42.pt","8d8aec3037e880c42fcc3eb1ad37e9f60302250d1ba3147f37c3e86909852b8f","fc3688553691016bbb10ed641862fd4b085dfc9faa9c537da5260914d47d061e","GloballyClusteredModel","{""class"": ""RecurrentStudent"", ""hidden_size"": 8, ""input_size"": 1, ""materialized_cluster_count"": 16, ""num_layers"": 1, ""output_size"": 1, ""parameters"": 289}","289","driver-42-tau0.05-heat800-artifactnone;driver-123-tau0.05-heat800-artifactnone;driver-456-tau0.05-heat800-artifactnone;driver-7-tau0.05-heat800-artifactnone;driver-99-tau0.05-heat800-artifactnone","driver-999-tau0.05-heat800-artifactnone","driver-777-tau0.05-heat800-artifactnone;driver-888-tau0.05-heat800-artifactnone;driver-555-tau0.05-heat800-artifactnone","final","cuda","cuda","42","16"

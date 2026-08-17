@@ -1,0 +1,2 @@
+dataset,source_id,timesteps,feature_count,output_count,chronological,profile,execution_device,device
+3d_thermal_crosstalk_data.csv,3d-thermal-crosstalk-record,3000,2,1,True,final,cuda,cuda

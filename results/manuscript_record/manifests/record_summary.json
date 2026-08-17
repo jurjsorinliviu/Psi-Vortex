@@ -1,0 +1,14 @@
+{
+  "status": "published",
+  "public_package_version": "2.0.4",
+  "configuration": "configs/final.json",
+  "experiment_groups": 28,
+  "result_rows": 895,
+  "source_split_rows_checked": 643,
+  "checkpoint_references": 468,
+  "unique_checkpoints": 394,
+  "recurrence_contract": "[batch, sequence_length, features] with sequence_length > 1",
+  "selection_policy": "validation-only architecture and cluster selection",
+  "seed_policy": "all declared seeds retained without best-seed selection",
+  "result_scope": "active manuscript results only"
+}
