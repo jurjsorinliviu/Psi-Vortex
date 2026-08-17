@@ -1,0 +1,31 @@
+THIRD-PARTY DATASET ATTRIBUTION AND LICENSE
+===========================================
+
+Dataset:  "Interfacial Organization of Graphene Oxide-Polyelectrolyte
+           Multilayers with Tunable Memristive Behavior"
+Authors:   Michal Szuwarzynski, Tomasz Kruk, Anna Kostecka, Anna Chrzaszcz,
+           Tomasz Mazur, Wojciech Wieczorek
+Source:    figshare, https://doi.org/10.6084/m9.figshare.31407306
+License:   Creative Commons Attribution 4.0 International (CC BY 4.0)
+           https://creativecommons.org/licenses/by/4.0/
+
+Use in this repository
+----------------------
+A SUBSET of this dataset is redistributed here: only the current-voltage sweep
+files (IV-plot_*.xlsx), unchanged. These are the files used by the real-data
+validation experiments (see data_go_pe.py and r1_real_data_validation.py). The
+complete dataset (AFM, QCM-D, UV-VIS, DLS, and potentiation-depression data) is
+available unchanged at the figshare DOI above; download it from there to
+reproduce analyses that need those files.
+
+License scope
+-------------
+This dataset is NOT covered by the repository's MIT license. It retains its
+original CC BY 4.0 license. The MIT license applies only to the source code in
+this repository.
+
+Attribution (please cite the original work when using this data):
+  M. Szuwarzynski, T. Kruk, A. Kostecka, A. Chrzaszcz, T. Mazur, and
+  W. Wieczorek, "Interfacial Organization of Graphene Oxide-Polyelectrolyte
+  Multilayers with Tunable Memristive Behavior," figshare, 2026.
+  https://doi.org/10.6084/m9.figshare.31407306 (CC BY 4.0).
