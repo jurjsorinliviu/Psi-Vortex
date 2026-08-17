@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+.venv/
+venv/
+build/
+dist/
+
+# Local runs are intentionally excluded. The verified result record below is tracked.
+results/*
+!results/manuscript_record/
+!results/manuscript_record/**
+
+# Editor and operating-system files.
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
