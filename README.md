@@ -2,6 +2,8 @@
 
 ## Structure-Regularized Recurrent Learning for Latent Thermal-Coupling Inference and Verilog-A Compact Modeling of 3D Neuromorphic Devices
 
+<img width="1948" height="2111" alt="main_figure1_workflow" src="https://github.com/user-attachments/assets/72b4d671-1112-4e09-b808-1da72f8f963a" />
+
 This is the complete public reproducibility bundle for Ψ-Vortex. It contains the canonical executable implementation, immutable input data, all declared experiment configurations, automated regression tests, the verified final result record, and deployment artifacts.
 
 ```mermaid
