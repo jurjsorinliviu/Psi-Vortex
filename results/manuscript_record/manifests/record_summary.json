@@ -1,6 +1,6 @@
 {
   "status": "published",
-  "public_package_version": "2.0.4",
+  "public_package_version": "1.0.0",
   "configuration": "configs/final.json",
   "experiment_groups": 28,
   "result_rows": 895,
