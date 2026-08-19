@@ -47,20 +47,65 @@ flowchart LR
     end
 ```
 
+## The 3D thermal-coupling scenario
+
+The motivating case study asks whether a history-dependent interlayer effect can be inferred from electrical trajectories without providing temperature measurements or coupling labels to the model. It is a calibrated two-layer synthetic proof of concept, not experimental validation on a fabricated stack.
+
+```mermaid
+flowchart LR
+    subgraph S["Calibrated two-layer synthetic scenario"]
+        D["Driver layer N<br/>chronological voltage trajectory"]
+        H["Unobserved heat accumulation<br/>history-dependent generator state"]
+        V["Victim layer N+1<br/>constant 0.2 V read"]
+        O["Victim current-ratio trajectory<br/>supervised target"]
+        D -->|"Joule heating"| H
+        H -->|"interlayer coupling"| V
+        V --> O
+    end
+
+    D --> M["Chronological recurrent model<br/>state isolated by source"]
+    M --> P["Predicted victim response"]
+    P --> Q{"Held-out R² >= 0.8?"}
+    Q -->|"yes"| A["Report free-intercept<br/>coupling estimate"]
+    Q -->|"no"| X["Abstain"]
+    M --> C["Validation-clustered<br/>recurrent student"]
+    C --> E["Guarded TorchScript and<br/>sampled-state Verilog-A"]
+```
+
+The reported coupling coefficient is estimated post hoc from disjoint held-out driver trajectories. It is not a literal learned parameter in the exported model. At `α = 0.08`, the recurrent configuration accepts 3/3 seeds, while the state-reset, shuffled-order, and pointwise/no-memory controls accept 0/9. The multilayer extension is not established.
+
+## Ψ-family methodological lineage
+
+This table summarizes the primary scope added by each framework. It is a methodological lineage, not a matched performance comparison across different publications and datasets. "Not in original scope" does not mean that a capability is impossible.
+
+| Capability                                                   |         Ψ-NN          |         Ψ-HDL         |        Ψ-xLSTM        |     **Ψ-Vortex v1.0.0**     |
+| ------------------------------------------------------------ | :-------------------: | :-------------------: | :-------------------: | :-------------------------: |
+| Teacher-student structural learning                          |          Yes          |          Yes          |          Yes          |             Yes             |
+| Recurrent temporal architecture                              |          No           |          No           |          Yes          |             Yes             |
+| Recurrent Relation-Aware Distillation                        |          No           |          No           |          Yes          |             Yes             |
+| Verilog-A generation                                         |          No           |          Yes          |          Yes          |             Yes             |
+| Canonical `[batch, sequence_length, features]` contract      |    Not applicable     |    Not applicable     | Not in original scope |             Yes             |
+| Source-disjoint splits, state isolation, and contiguous TBPTT |    Not applicable     |    Not applicable     | Not in original scope |             Yes             |
+| Validation-selected architecture and cluster count           |          No           |          No           |          No           | Bounded candidate selection |
+| Held-out R² acceptance and abstention                        |          No           |          No           |          No           |             Yes             |
+| Latent thermal-coupling benchmark                            |          No           |          No           |          No           | Bounded synthetic evidence  |
+| Guarded batch and stateful streaming export                  | Not in original scope | Not in original scope | Not in original scope |             Yes             |
+| Compiled sampled-state recurrent OpenVAF/ngspice validation  |    Not applicable     |    Not applicable     | Not in original scope |     Five stimuli passed     |
+
 ## Verified result record
 
 The verified final evidence is in [`results/manuscript_record/`](results/manuscript_record/).
 
 The public record contains:
 
-| Record item | Verified value |
-|---|---:|
-| Registered experiment groups | 28/28 |
-| Active result rows | 895 |
-| Result rows with checked source-level splits | 643 |
-| Checkpoint references | 468 |
-| Unique checkpoint files | 394 |
-| Public package version | 2.0.4 |
+| Record item                                  | Verified value |
+| -------------------------------------------- | -------------: |
+| Registered experiment groups                 |          28/28 |
+| Active result rows                           |            895 |
+| Result rows with checked source-level splits |            643 |
+| Checkpoint references                        |            468 |
+| Unique checkpoint files                      |            394 |
+| Public package version                       |          1.0.0 |
 
 The complete numerical record is under `raw_results/`. Every retained file is covered by [`manifests/file_inventory.csv`](results/manuscript_record/manifests/file_inventory.csv), including its byte size and SHA-256 digest.
 
@@ -73,12 +118,12 @@ At the nominal coupling coefficient `α = 0.08`, chronological Ψ-Vortex gives m
 The complete declared coupling sweep is:
 
 | True α | Mean relative error | Mean held-out R² | Accepted seeds |
-|---:|---:|---:|---:|
-| 0.05 | 4.6% | 0.980 | 3/3 |
-| 0.08 | 9.2% | 0.981 | 3/3 |
-| 0.10 | 36.0% | 0.698 | 1/3 |
-| 0.15 | 56.5% | 0.588 | 1/3 |
-| 0.20 | 58.6% | 0.569 | 0/3 |
+| -----: | ------------------: | ---------------: | -------------: |
+|   0.05 |                4.6% |            0.980 |            3/3 |
+|   0.08 |                9.2% |            0.981 |            3/3 |
+|   0.10 |               36.0% |            0.698 |            1/3 |
+|   0.15 |               56.5% |            0.588 |            1/3 |
+|   0.20 |               58.6% |            0.569 |            0/3 |
 
 The result record supports recovery at `α = 0.05` and `α = 0.08`. It does not support reliable full-range recovery.
 
@@ -108,10 +153,10 @@ Cross-device and cross-rate cell-mean correlations are at least 0.974 and 0.976.
 
 The canonical synthetic export accounting is:
 
-| Model | Effective values | Expanded parameters | Expanded float32 bytes | Serialized artifact bytes |
-|---|---:|---:|---:|---:|
-| Recurrent teacher | 26,273 | 26,273 | 105,092 | not applicable |
-| Clustered GRU export | 16 | 273 | 1,092 | 14,875 |
+| Model                | Effective values | Expanded parameters | Expanded float32 bytes | Serialized artifact bytes |
+| -------------------- | ---------------: | ------------------: | ---------------------: | ------------------------: |
+| Recurrent teacher    |           26,273 |              26,273 |                105,092 |            not applicable |
+| Clustered GRU export |               16 |                 273 |                  1,092 |                    14,875 |
 
 This is a 98.96% reduction in expanded parameter count. Centroid count, expanded parameters, expanded bytes, and serialized file size are intentionally reported as different quantities. The TorchScript artifact is not centroid-coded storage.
 
@@ -255,16 +300,16 @@ flowchart TD
 
 ### Files that define the public workflow
 
-| File | Use |
-|---|---|
-| [`psi_vortex/data.py`](psi_vortex/data.py) | `Trajectory`, chronological windows, complete-trajectory batching, and contiguous TBPTT chunks |
-| [`psi_vortex/datasets.py`](psi_vortex/datasets.py) | Built-in CSV and Excel loaders plus source-level split helpers |
-| [`psi_vortex/pipeline.py`](psi_vortex/pipeline.py) | Teacher training, RRAD distillation, validation-only BIC selection, evaluation, and export |
-| [`psi_vortex/models.py`](psi_vortex/models.py) | Canonical teacher, GRU student, and low-rank recurrent student |
-| [`psi_vortex/trainer.py`](psi_vortex/trainer.py) | Lower-level trajectory-safe training and state handling |
-| [`psi_vortex/export.py`](psi_vortex/export.py) | Guarded TorchScript batch and stateful `step()` deployment APIs |
+| File                                                         | Use                                                          |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [`psi_vortex/data.py`](psi_vortex/data.py)                   | `Trajectory`, chronological windows, complete-trajectory batching, and contiguous TBPTT chunks |
+| [`psi_vortex/datasets.py`](psi_vortex/datasets.py)           | Built-in CSV and Excel loaders plus source-level split helpers |
+| [`psi_vortex/pipeline.py`](psi_vortex/pipeline.py)           | Teacher training, RRAD distillation, validation-only BIC selection, evaluation, and export |
+| [`psi_vortex/models.py`](psi_vortex/models.py)               | Canonical teacher, GRU student, and low-rank recurrent student |
+| [`psi_vortex/trainer.py`](psi_vortex/trainer.py)             | Lower-level trajectory-safe training and state handling      |
+| [`psi_vortex/export.py`](psi_vortex/export.py)               | Guarded TorchScript batch and stateful `step()` deployment APIs |
 | [`tests/test_recurrence_and_science.py`](tests/test_recurrence_and_science.py) | Executable examples of sequence, ordering, split, and state-isolation requirements |
-| [`configs/smoke.json`](configs/smoke.json) | Small configuration example for checking a new environment, not universal hyperparameters |
+| [`configs/smoke.json`](configs/smoke.json)                   | Small configuration example for checking a new environment, not universal hyperparameters |
 
 Write new outputs to a separate directory such as `results/my_device_study/`. Do not modify `results/manuscript_record/` or reuse its checkpoints as results for a new dataset.
 
@@ -272,12 +317,12 @@ Write new outputs to a separate directory such as `results/my_device_study/`. Do
 
 The built-in `load_printed_memristor()` path expects at least these columns:
 
-| Column | Meaning |
-|---|---|
-| `device_id` | Persistent physical device or sample identifier |
-| `cycle_id` | Complete voltage sweep or independently acquired cycle identifier |
-| `voltage` | Input voltage in chronological acquisition order |
-| `current` | Target current in the same order |
+| Column      | Meaning                                                      |
+| ----------- | ------------------------------------------------------------ |
+| `device_id` | Persistent physical device or sample identifier              |
+| `cycle_id`  | Complete voltage sweep or independently acquired cycle identifier |
+| `voltage`   | Input voltage in chronological acquisition order             |
+| `current`   | Target current in the same order                             |
 
 Optional `voltage_noisy` and `current_noisy` columns are used when `use_noisy=True`. Rows must already be ordered by `device_id`, `cycle_id`, and physical sample order because the loader never shuffles or sorts timesteps internally. The loader creates two features: voltage and normalized position within the cycle. It scales current by the standard deviation of the selected current column over the supplied file.
 
