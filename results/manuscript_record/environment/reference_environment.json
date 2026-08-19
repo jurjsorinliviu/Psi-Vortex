@@ -1,5 +1,5 @@
 {
-  "public_package_version": "2.0.4",
+  "public_package_version": "1.0.0",
   "python": "3.14.0",
   "torch": "2.9.0+cu130",
   "numpy": "2.3.4",
