@@ -1,5 +1,5 @@
 cff-version: 1.0.0
-message: "If you use this reproducibility suite, cite the Ψ-Vortex manuscript."
+message: "If you use this software, please cite the Ψ-Vortex paper when its final citation becomes available."
 title: "Ψ-Vortex reproducible chronological suite"
 type: software
 authors:
