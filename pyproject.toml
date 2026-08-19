@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "psi-vortex-reproducible"
-version = "2.0.4"
+version = "1.0.0"
 description = "Complete chronological Ψ-Vortex experiment and deployment reproducibility suite"
 requires-python = ">=3.10"
 dependencies = [
