@@ -1,5 +1,5 @@
 """Public chronological Ψ-Vortex API."""
-__version__ = "2.0.4"
+__version__ = "1.0.0"
 from .architecture import ArchitectureCandidate, ArchitectureScore, select_architecture
 from .baselines import PIKAN, SINDyRegressor, StaticMLP, VanillaLSTM, train_static_model
 from .bic import GloballyClusteredModel, materialize_weight_clusters, select_cluster_count
