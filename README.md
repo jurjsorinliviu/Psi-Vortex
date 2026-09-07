@@ -537,3 +537,6 @@ For the next independent trajectory, call `initial_state()` again. Never carry t
 - If only one physical device is available, held-out-device generalization cannot be measured. Independently reset cycles may be assigned cycle-level source IDs, but the resulting claim must be limited to held-out-cycle performance.
 
 Before trusting a new result, run the recurrence tests and add a dataset-specific test that checks chronological time, sequence length greater than one, disjoint source IDs, and state reset at every independent trajectory boundary.
+
+## Technical Rationale Document
+See the accompanying [technical rationale document](psi-vortex-technical-rationale.pdf), which provides the design lineage, architectural motivations, and scope boundaries of the framework. Note: This document provides architectural and historical context for the Ψ-Vortex framework. It complements, but does not replace, the peer-reviewed manuscript.
