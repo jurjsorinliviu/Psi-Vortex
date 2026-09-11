@@ -268,12 +268,16 @@ If the external tools are unavailable, the run records a skip and does not label
 Citation metadata are provided in [`CITATION.cff`](CITATION.cff).
 
 ```bibtex
-@misc{jurj_psi-vortex_2026,
-  author = {Sorin Liviu Jurj},
-  title = {Ψ-Vortex: Structure-Regularized Recurrent Learning for Latent Thermal-Coupling Inference and Verilog-A Compact Modeling of 3D Neuromorphic Devices},
-  year = {2026},
-  note = {under review}
-}
+@ARTICLE{11685927,
+  author={Jurj, Sorin Liviu},
+  journal={IEEE Access}, 
+  title={Ψ-Vortex: Structure-Regularized Recurrent Learning for Latent Thermal-Coupling Inference and Verilog-A Compact Modeling of Three-Dimensional Neuromorphic Devices}, 
+  year={2026},
+  volume={},
+  number={},
+  pages={1-1},
+  keywords={Modeling;Physics;Joining processes;Seeds (agriculture);Long short term memory;Testing;Training;Couplings;Architecture;Computer architecture;Physics-informed machine learning;recurrent neural networks;compact modeling;latent-state inference;Verilog-A},
+  doi={10.1109/ACCESS.2026.3732481}}
 ```
 
 ## Licenses
